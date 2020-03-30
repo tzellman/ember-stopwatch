@@ -1,23 +1,54 @@
+<div>100 ms ticks</div>
+<StopwatchDisplay
+    @stopwatch={{this.stopwatch}}
+    @start={{this.start}}
+    @stop={{this.stop}}
+    @reset={{this.reset}}
+/>
+
+<div>1s ticks</div>
+<StopwatchDisplay
+    @stopwatch={{this.secondWatch}}
+    @start={{this.start}}
+    @stop={{this.stop}}
+    @reset={{this.reset}}
+/>
+
+<div>5s ticks</div>
+<StopwatchDisplay
+    @stopwatch={{this.fiveSecondWatch}}
+    @start={{this.start}}
+    @stop={{this.stop}}
+    @reset={{this.reset}}
+/>
+
+<div>All stopwatches</div>
+<button {{on "click" (pipe
+        (fn this.start this.stopwatch)
+        (fn this.start this.secondWatch)
+        (fn this.start this.fiveSecondWatch)
+)}}>
+    Start
+</button>
+<button {{on "click" (pipe
+        (fn this.stop this.stopwatch)
+        (fn this.stop this.secondWatch)
+        (fn this.stop this.fiveSecondWatch)
+)}}>
+    Stop
+</button>
+<button {{on "click" (pipe
+        (fn this.reset this.stopwatch)
+        (fn this.reset this.secondWatch)
+        (fn this.reset this.fiveSecondWatch)
+)}}>
+    Reset
+</button>
+
 <div>
-    <div>
-        Elapsed: {{this.stopwatch.elapsedMillis}}
-    </div>
-    <div>
-        System Elapsed: {{this.stopwatch.systemElapsedMillis}}
-    </div>
-    <div>
-        Variance: {{this.stopwatch.variance}}
-    </div>
-
-    <button {{on "click" (fn this.start)}}>
-        Start
-    </button>
-
-    <button {{on "click" (fn this.stop)}}>
-        Stop
-    </button>
-
-    <button {{on "click" (fn this.reset)}}>
-        Reset
-    </button>
+    <label>Force stop/reset?</label>
+    <Input
+        @type="checkbox"
+        @checked={{this.force}}
+    />
 </div>

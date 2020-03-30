@@ -17,6 +17,10 @@ export default class StopwatchService extends Service {
         return this.stopwatch.systemElapsedMillis;
     }
 
+    get numTicks() {
+        return this.stopwatch.numTicks;
+    }
+
     start() {
         this.stopwatch.start();
     }

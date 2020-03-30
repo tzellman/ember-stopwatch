@@ -1,0 +1,26 @@
+<div>
+    <div>
+        Elapsed: {{@stopwatch.elapsedMillis}}
+    </div>
+    <div>
+        System Elapsed: {{@stopwatch.systemElapsedMillis}}
+    </div>
+    <div>
+        Variance: {{@stopwatch.variance}}
+    </div>
+    <div>
+        Ticks: {{@stopwatch.numTicks}}
+    </div>
+
+    <button {{on "click" (fn @start @stopwatch)}}>
+        Start
+    </button>
+
+    <button {{on "click" (fn @stop @stopwatch)}}>
+        Stop
+    </button>
+
+    <button {{on "click" (fn @reset @stopwatch)}}>
+        Reset
+    </button>
+</div>

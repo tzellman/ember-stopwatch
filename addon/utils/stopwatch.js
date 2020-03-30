@@ -5,6 +5,7 @@ export const DEFAULT_TICK_MILLIS = 100;
 export default class Stopwatch {
     @tracked elapsedMillis = 0;
     @tracked systemElapsedMillis = 0;
+    @tracked numTicks = 0;
 
     constructor(tickMillis = DEFAULT_TICK_MILLIS) {
         this.tickMillis = Math.max(0, tickMillis || DEFAULT_TICK_MILLIS);
@@ -48,6 +49,7 @@ export default class Stopwatch {
     _tick() {
         this.elapsedMillis += this.tickMillis;
         this.systemElapsedMillis = Date.now() - this.startTime + (this.cachedSystemMillis || 0);
+        this.numTicks += 1;
         this._checkSentinels();
     }
 
@@ -70,6 +72,7 @@ export default class Stopwatch {
 
     _forceReset() {
         this._forceStop();
+        this.numTicks = 0;
         this.elapsedMillis = 0;
         this.systemElapsedMillis = 0;
         this.startTime = undefined;

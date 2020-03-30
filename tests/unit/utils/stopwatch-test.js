@@ -27,15 +27,19 @@ module('Unit | Utility | stopwatch', function (hooks) {
 
         this.nativeTimer.tick(99);
         assert.equal(stopwatch.elapsedMillis, 0, `stopwatch tick has not been triggered yet`);
+        assert.equal(stopwatch.numTicks, 0, `stopwatch tick has not been triggered yet`);
 
         this.nativeTimer.tick(1);
         assert.equal(stopwatch.elapsedMillis, 100, `stopwatch tick has been triggered once`);
+        assert.equal(stopwatch.numTicks, 1, `stopwatch tick has been triggered once`);
 
         this.nativeTimer.tick(15);
         assert.equal(stopwatch.elapsedMillis, 100, `stopwatch tick still should only be triggered once`);
+        assert.equal(stopwatch.numTicks, 1, `stopwatch tick has been triggered once`);
 
         this.nativeTimer.tick(85);
         assert.equal(stopwatch.elapsedMillis, 200, `stopwatch tick should only be triggered twice`);
+        assert.equal(stopwatch.numTicks, 2, `stopwatch tick has been triggered twice`);
     });
 
     test('checks that scheduled stop works', function (assert) {

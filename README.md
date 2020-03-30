@@ -1,6 +1,7 @@
 # ember-stopwatch
 
-[Short description of the addon.]
+This addon provides some utilities and services that make it easier
+to control timing in your Ember applications.
 
 ## Compatibility
 
@@ -16,7 +17,41 @@ ember install ember-stopwatch
 
 ## Usage
 
-[Longer description of how to use the addon in apps.]
+### As a utility
+
+This is the primary use-case, and allows you to create multiple stopwatches anywhere
+in your application.
+
+```
+import Stopwatch from 'ember-stopwatch/utils/stopwatch';
+
+let stopwatch = new Stopwatch();
+stopwatch.start();
+stopwatch.stop();
+stopwatch.reset();
+```
+
+### As a Service
+
+A `stopwatch` service can be used that is shared globally in your application.
+
+```
+export default class extends Component {
+    @service stopwatch;
+    @action
+    start() {
+        this.stopwatch.start();
+    }
+    @action
+    stop() {
+        this.stopwatch.stop();
+    }
+    @action
+    reset() {
+        this.stopwatch.reset();
+    }
+}
+```
 
 ## Contributing
 
