@@ -1,6 +1,6 @@
 {
   "name": "ember-stopwatch",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0",
   "description": "Stopwatches, timers, clocks, oh my!",
   "keywords": [
     "ember-addon",
@@ -33,6 +33,7 @@
     "@ember/optional-features": "^1.3.0",
     "@glimmer/component": "^1.0.0",
     "@glimmer/tracking": "^1.0.0",
+    "@sinonjs/fake-timers": "^6.0.1",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
     "ember-auto-import": "^1.5.3",
