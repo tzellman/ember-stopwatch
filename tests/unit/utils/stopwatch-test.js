@@ -129,4 +129,22 @@ module('Unit | Utility | stopwatch', function (hooks) {
         assert.notOk(stopwatch.isRunning, `stopwatch should not be running`);
         assert.equal(stopwatch.elapsedMillis, 600, `stopwatch should have ticked 6 times`);
     });
+
+    test('checks that event listeners receive events', function (assert) {
+        let stopwatch = new Stopwatch(100);
+        let count = 0;
+        const onTick = () => {
+            count++;
+        };
+
+        stopwatch.on(onTick);
+        stopwatch.start();
+        this.nativeTimer.tick(300);
+        assert.equal(count, 3, `should receive 3 events`);
+
+        // remove listener
+        stopwatch.off(onTick);
+        this.nativeTimer.tick(1000);
+        assert.equal(count, 3, `should still only have received 3 events`);
+    });
 });

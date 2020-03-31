@@ -1,4 +1,6 @@
 import { tracked } from '@glimmer/tracking';
+import EmberObject from '@ember/object';
+import Evented from '@ember/object/evented';
 
 export const DEFAULT_TICK_MILLIS = 100;
 
@@ -7,6 +9,7 @@ export default class Stopwatch {
     @tracked systemElapsedMillis = 0;
     @tracked numTicks = 0;
     @tracked intervalId;
+    eventManager = EmberObject.extend(Evented).create();
 
     constructor(tickMillis = DEFAULT_TICK_MILLIS) {
         this.tickMillis = Math.max(0, tickMillis || DEFAULT_TICK_MILLIS);
@@ -43,6 +46,16 @@ export default class Stopwatch {
         }
     }
 
+    on(target, method) {
+        this.eventManager.on('tick', target, method);
+        return this;
+    }
+
+    off(target, method) {
+        this.eventManager.off('tick', target, method);
+        return this;
+    }
+
     get variance() {
         return this.systemElapsedMillis - this.elapsedMillis;
     }
@@ -52,6 +65,7 @@ export default class Stopwatch {
         this.systemElapsedMillis = Date.now() - this.startTime + (this.cachedSystemMillis || 0);
         this.numTicks += 1;
         this._checkSentinels();
+        this.eventManager.trigger('tick', this);
     }
 
     _checkSentinels() {
