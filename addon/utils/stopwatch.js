@@ -21,6 +21,7 @@ export default class Stopwatch {
             this.intervalId = setInterval(() => {
                 this._tick();
             }, this.tickMillis);
+            this.eventManager.trigger('start', this);
         }
     }
 
@@ -46,13 +47,20 @@ export default class Stopwatch {
         }
     }
 
-    on(target, method) {
-        this.eventManager.on('tick', target, method);
+    /**
+     * Listens for events
+     * @param event supported events are tick|start|stop|reset
+     * @param target optional target for this
+     * @param method the method to call
+     * @return {Stopwatch}
+     */
+    on(event, target, method) {
+        this.eventManager.on(event, target, method);
         return this;
     }
 
-    off(target, method) {
-        this.eventManager.off('tick', target, method);
+    off(event, target, method) {
+        this.eventManager.off(event, target, method);
         return this;
     }
 
@@ -64,8 +72,8 @@ export default class Stopwatch {
         this.elapsedMillis += this.tickMillis;
         this.systemElapsedMillis = Date.now() - this.startTime + (this.cachedSystemMillis || 0);
         this.numTicks += 1;
-        this._checkSentinels();
         this.eventManager.trigger('tick', this);
+        this._checkSentinels();
     }
 
     _checkSentinels() {
@@ -83,6 +91,7 @@ export default class Stopwatch {
         this.intervalId = undefined;
         this.cachedSystemMillis = this.systemElapsedMillis;
         this.stopSentinel = false;
+        this.eventManager.trigger('stop', this);
     }
 
     _forceReset() {
@@ -93,5 +102,6 @@ export default class Stopwatch {
         this.startTime = undefined;
         this.cachedSystemMillis = 0;
         this.resetSentinel = false;
+        this.eventManager.trigger('reset', this);
     }
 }
