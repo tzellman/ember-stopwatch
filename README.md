@@ -9,6 +9,10 @@ to control timing in your Ember applications.
 ember install ember-stopwatch
 ```
 
+## Demo
+
+[Demo](https://tzellman.github.io/ember-stopwatch/)
+
 ## Usage
 
 -   [Stopwatch](#stopwatch)
