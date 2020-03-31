@@ -1,0 +1,8 @@
+<button
+    class={{concat
+        "bg-" @color "-500 hover:bg-" @color "-700 p-1 rounded text-white text-xl " @class
+    }}
+    {{on "click" @action}}
+>
+    {{@label}}
+</button>

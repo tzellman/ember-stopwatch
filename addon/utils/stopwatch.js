@@ -6,6 +6,7 @@ export default class Stopwatch {
     @tracked elapsedMillis = 0;
     @tracked systemElapsedMillis = 0;
     @tracked numTicks = 0;
+    @tracked intervalId;
 
     constructor(tickMillis = DEFAULT_TICK_MILLIS) {
         this.tickMillis = Math.max(0, tickMillis || DEFAULT_TICK_MILLIS);

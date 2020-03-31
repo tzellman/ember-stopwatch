@@ -34,12 +34,14 @@
     "@glimmer/component": "^1.0.0",
     "@glimmer/tracking": "^1.0.0",
     "@sinonjs/fake-timers": "^6.0.1",
+    "autoprefixer": "^9.7.5",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
     "ember-auto-import": "^1.5.3",
     "ember-cli": "~3.17.0",
     "ember-cli-dependency-checker": "^3.2.0",
     "ember-cli-inject-live-reload": "^2.0.2",
+    "ember-cli-postcss": "^6.0.0",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-uglify": "^3.0.0",
     "ember-composable-helpers": "^3.1.1",
@@ -62,7 +64,8 @@
     "micromatch": "^4.0.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.2",
-    "qunit-dom": "^1.1.0"
+    "qunit-dom": "^1.1.0",
+    "tailwindcss": "^1.2.0"
   },
   "engines": {
     "node": "10.* || >= 12"

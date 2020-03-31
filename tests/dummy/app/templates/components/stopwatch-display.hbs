@@ -1,26 +1,30 @@
-<div>
+<div class={{concat "flex flex-col border rounded p-2 " @class}}>
+    {{#if @title}}
+        <div class="font-bold text-2xl underline">
+            {{@title}}
+        </div>
+    {{/if}}
     <div>
-        Elapsed: {{@stopwatch.elapsedMillis}}
+        <span class="font-thin">Elapsed:</span>
+        <span class="font-mono">{{@stopwatch.elapsedMillis}}</span>
     </div>
     <div>
-        System Elapsed: {{@stopwatch.systemElapsedMillis}}
+        <span class="font-thin">System Elapsed:</span>
+        <span class="font-mono">{{@stopwatch.systemElapsedMillis}}</span>
     </div>
     <div>
-        Variance: {{@stopwatch.variance}}
+        <span class="font-thin">Variance:</span>
+        <span class="font-mono">{{@stopwatch.variance}}</span>
     </div>
     <div>
-        Ticks: {{@stopwatch.numTicks}}
+        <span class="font-thin">Ticks:</span>
+        <span class="font-mono">{{@stopwatch.numTicks}}</span>
     </div>
 
-    <button {{on "click" (fn @start @stopwatch)}}>
-        Start
-    </button>
-
-    <button {{on "click" (fn @stop @stopwatch)}}>
-        Stop
-    </button>
-
-    <button {{on "click" (fn @reset @stopwatch)}}>
-        Reset
-    </button>
+    <StopwatchControls
+        @start={{fn @start @stopwatch}}
+        @stop={{fn @stop @stopwatch}}
+        @reset={{fn @reset @stopwatch}}
+        @class="mt-2"
+    />
 </div>
