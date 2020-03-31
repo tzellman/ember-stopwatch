@@ -1,22 +1,23 @@
 <div class={{concat "flex flex-row w-full " @class}}>
     <Button
-        @label="Start"
+        @label={{or @startLabel "Start"}}
         @color="green"
         @action={{@start}}
         @class="mr-1"
     />
 
     <Button
-        @label="Stop"
+        @label={{or @stopLabel "Stop"}}
         @color="red"
         @action={{@stop}}
         @class="mx-1"
     />
 
     <Button
-        @label="Reset"
+        @label={{or @resetLabel "Reset"}}
         @color="orange"
         @action={{@reset}}
+        @type="reset"
         @class="ml-1"
     />
 </div>

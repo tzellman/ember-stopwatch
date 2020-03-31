@@ -1,5 +1,7 @@
+// eslint-disable-next-line no-undef
 const micromatch = require('micromatch');
 
+// eslint-disable-next-line no-undef
 module.exports = {
     '*.{ts,yml,js,json,md,scss,css}': (files) => {
         const match = micromatch.not(files, [

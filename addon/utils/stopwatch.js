@@ -1,32 +1,38 @@
 import { tracked } from '@glimmer/tracking';
-import EmberObject from '@ember/object';
-import Evented from '@ember/object/evented';
+import Evented from './evented';
 
 export const DEFAULT_TICK_MILLIS = 100;
 
-export default class Stopwatch {
+/**
+ * Supported subscription events are: tick, start, stop, reset
+ */
+export default class Stopwatch extends Evented {
     @tracked elapsedMillis = 0;
     @tracked systemElapsedMillis = 0;
     @tracked numTicks = 0;
     @tracked intervalId;
-    eventManager = EmberObject.extend(Evented).create();
 
     constructor(tickMillis = DEFAULT_TICK_MILLIS) {
+        super();
         this.tickMillis = Math.max(0, tickMillis || DEFAULT_TICK_MILLIS);
     }
 
     start() {
-        if (!this.intervalId) {
+        if (!this.isRunning) {
             this.startTime = Date.now();
             this.intervalId = setInterval(() => {
                 this._tick();
             }, this.tickMillis);
-            this.eventManager.trigger('start', this);
+            this.trigger('start', this);
         }
     }
 
     get isRunning() {
         return this.intervalId !== undefined;
+    }
+
+    get resolutionMillis() {
+        return this.tickMillis;
     }
 
     reset(force = false) {
@@ -47,23 +53,6 @@ export default class Stopwatch {
         }
     }
 
-    /**
-     * Listens for events
-     * @param event supported events are tick|start|stop|reset
-     * @param target optional target for this
-     * @param method the method to call
-     * @return {Stopwatch}
-     */
-    on(event, target, method) {
-        this.eventManager.on(event, target, method);
-        return this;
-    }
-
-    off(event, target, method) {
-        this.eventManager.off(event, target, method);
-        return this;
-    }
-
     get variance() {
         return this.systemElapsedMillis - this.elapsedMillis;
     }
@@ -72,7 +61,7 @@ export default class Stopwatch {
         this.elapsedMillis += this.tickMillis;
         this.systemElapsedMillis = Date.now() - this.startTime + (this.cachedSystemMillis || 0);
         this.numTicks += 1;
-        this.eventManager.trigger('tick', this);
+        this.trigger('tick', this);
         this._checkSentinels();
     }
 
@@ -91,7 +80,7 @@ export default class Stopwatch {
         this.intervalId = undefined;
         this.cachedSystemMillis = this.systemElapsedMillis;
         this.stopSentinel = false;
-        this.eventManager.trigger('stop', this);
+        this.trigger('stop', this);
     }
 
     _forceReset() {
@@ -102,6 +91,6 @@ export default class Stopwatch {
         this.startTime = undefined;
         this.cachedSystemMillis = 0;
         this.resetSentinel = false;
-        this.eventManager.trigger('reset', this);
+        this.trigger('reset', this);
     }
 }
