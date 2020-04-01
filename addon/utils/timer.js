@@ -1,4 +1,3 @@
-import { tracked } from '@glimmer/tracking';
 import Stopwatch, { DEFAULT_TICK_MILLIS } from './stopwatch';
 
 // for now, aliasing the stopwatch default millis
