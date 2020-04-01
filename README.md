@@ -3,8 +3,8 @@
 [![NPM][npm-badge-img]][npm-badge-link]
 [![Build Status][build-status-img]][build-status-link]
 [![Ember Observer Score][ember-observer-badge]][ember-observer-url]
-![Ember Version][ember-version]
-![Download count][npm-downloads-img]
+[![Ember Version][ember-version]][ember-version-url]
+[![Download count][npm-downloads-img]][npm-badge-link]
 [![Code Climate][climate-badge]][climate-badge-url]
 [![Test Coverage][coverage-badge]][coverage-badge-url]
 
@@ -112,6 +112,7 @@ This project is licensed under the [MIT License](LICENSE.md).
 [ember-observer-badge]: http://emberobserver.com/badges/ember-stopwatch.svg
 [ember-observer-url]: http://emberobserver.com/addons/ember-stopwatch
 [ember-version]: https://img.shields.io/badge/Ember-3.12%2B-brightgreen.svg
+[ember-version-url]: https://blog.emberjs.com/2019/08/16/ember-3-12-released.html
 [coverage-badge]: https://codeclimate.com/github/tzellman/ember-stopwatch/badges/coverage.svg
 [coverage-badge-url]: https://codeclimate.com/github/tzellman/ember-stopwatch/test_coverage
 [climate-badge]: https://codeclimate.com/github/tzellman/ember-stopwatch/badges/gpa.svg
