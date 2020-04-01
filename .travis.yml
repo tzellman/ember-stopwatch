@@ -18,6 +18,11 @@ env:
     global:
         # See https://git.io/vdao3 for details.
         - JOBS=1
+        - CC_TEST_REPORTER_ID=3c17d30a957d0b5f06d932c3dd8ce9354df2b8d7769710d8827e6261445839d8
+
+before_install:
+    - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+    - chmod +x ./cc-test-reporter
 
 branches:
     only:
@@ -57,3 +62,7 @@ jobs:
 
 script:
     - COVERAGE=true node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO
+
+after_script:
+    - ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.json coverage/lcov.info
+    - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage; fi

@@ -5,6 +5,8 @@
 [![Ember Observer Score][ember-observer-badge]][ember-observer-url]
 ![Ember Version][ember-version]
 ![Download count][npm-downloads-img]
+[![Code Climate][climate-badge]][climate-badge-url]
+[![Test Coverage][coverage-badge]][coverage-badge-url]
 
 This addon provides some utilities and services that make it easier
 to control timing in your Ember applications.
@@ -110,3 +112,7 @@ This project is licensed under the [MIT License](LICENSE.md).
 [ember-observer-badge]: http://emberobserver.com/badges/ember-stopwatch.svg
 [ember-observer-url]: http://emberobserver.com/addons/ember-stopwatch
 [ember-version]: https://img.shields.io/badge/Ember-3.12%2B-brightgreen.svg
+[coverage-badge]: https://codeclimate.com/github/tzellman/ember-stopwatch/badges/coverage.svg
+[coverage-badge-url]: https://codeclimate.com/github/tzellman/ember-stopwatch/test_coverage
+[climate-badge]: https://codeclimate.com/github/tzellman/ember-stopwatch/badges/gpa.svg
+[climate-badge-url]: https://codeclimate.com/github/tzellman/ember-stopwatch
