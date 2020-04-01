@@ -2,7 +2,7 @@ import Stopwatch, { DEFAULT_TICK_MILLIS } from 'ember-stopwatch/utils/stopwatch'
 import fakeTimers from '@sinonjs/fake-timers';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import { assertStopwatchListeners, StopwatchListener } from '../shared';
+import { assertStopwatchListeners } from '../shared';
 
 module('Unit | Utility | stopwatch', function (hooks) {
     setupTest(hooks);
