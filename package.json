@@ -8,7 +8,7 @@
     "timer",
     "clock"
   ],
-  "repository": "",
+  "repository": "https://github.com/tzellman/ember-stopwatch.git",
   "license": "MIT",
   "author": "tzellman",
   "directories": {
