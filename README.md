@@ -1,5 +1,10 @@
 # ember-stopwatch
 
+[![NPM][npm-badge-img]][npm-badge-link]
+[![Ember Observer Score][ember-observer-badge]][ember-observer-url]
+![Ember Version][ember-version]
+![Download count][npm-downloads-img]
+
 This addon provides some utilities and services that make it easier
 to control timing in your Ember applications.
 
@@ -95,3 +100,10 @@ See the [Contributing](CONTRIBUTING.md) guide for details.
 ## License
 
 This project is licensed under the [MIT License](LICENSE.md).
+
+[npm-badge-img]: https://badge.fury.io/js/ember-stopwatch.svg
+[npm-badge-link]: http://badge.fury.io/js/ember-stopwatch
+[npm-downloads-img]: https://img.shields.io/npm/dt/ember-stopwatch.svg
+[ember-observer-badge]: http://emberobserver.com/badges/ember-stopwatch.svg
+[ember-observer-url]: http://emberobserver.com/addons/ember-stopwatch
+[ember-version]: https://img.shields.io/badge/Ember-3.12%2B-brightgreen.svg

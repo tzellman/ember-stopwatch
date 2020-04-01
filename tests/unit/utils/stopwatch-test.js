@@ -2,6 +2,7 @@ import Stopwatch, { DEFAULT_TICK_MILLIS } from 'ember-stopwatch/utils/stopwatch'
 import fakeTimers from '@sinonjs/fake-timers';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
+import { assertStopwatchListeners, StopwatchListener } from '../shared';
 
 module('Unit | Utility | stopwatch', function (hooks) {
     setupTest(hooks);
@@ -16,6 +17,12 @@ module('Unit | Utility | stopwatch', function (hooks) {
 
     test('can create with defaults', function (assert) {
         let stopwatch = new Stopwatch();
+        assert.ok(stopwatch);
+        assert.equal(stopwatch.tickMillis, DEFAULT_TICK_MILLIS);
+    });
+
+    test('can create with 0 and use default', function (assert) {
+        let stopwatch = new Stopwatch(0);
         assert.ok(stopwatch);
         assert.equal(stopwatch.tickMillis, DEFAULT_TICK_MILLIS);
     });
@@ -120,6 +127,7 @@ module('Unit | Utility | stopwatch', function (hooks) {
         assert.equal(stopwatch.elapsedMillis, 100, `stopwatch should have only ticked once`);
 
         stopwatch.start();
+        stopwatch.start();
         assert.ok(stopwatch.isRunning, `stopwatch should be running`);
         // tick 5 times
         this.nativeTimer.tick(499);
@@ -132,45 +140,6 @@ module('Unit | Utility | stopwatch', function (hooks) {
 
     test('checks that event listeners receive events', function (assert) {
         let stopwatch = new Stopwatch(100);
-        let counts = {
-            tick: 0,
-            start: 0,
-            stop: 0,
-            reset: 0
-        };
-        const onHandler = (type) => {
-            counts[type]++;
-        };
-        const tickHandler = onHandler.bind(this, 'tick');
-        const startHandler = onHandler.bind(this, 'start');
-        const stopHandler = onHandler.bind(this, 'stop');
-        const resetHandler = onHandler.bind(this, 'reset');
-
-        stopwatch.on('tick', tickHandler);
-        stopwatch.on('start', startHandler);
-        stopwatch.on('stop', stopHandler);
-        stopwatch.on('reset', resetHandler);
-
-        stopwatch.start();
-        this.nativeTimer.tick(300);
-        assert.equal(counts.tick, 3, `should receive 3 events`);
-
-        // remove listener
-        stopwatch.off('tick', tickHandler);
-        this.nativeTimer.tick(1000);
-        assert.equal(counts.tick, 3, `should still only have received 3 events`);
-
-        assert.equal(counts.start, 1, `should still only started once`);
-        assert.equal(counts.stop, 0, `should have no stops`);
-        assert.equal(counts.reset, 0, `should have no resets`);
-
-        stopwatch.stop(true);
-        assert.equal(counts.stop, 1, `should have 1 stop`);
-        stopwatch.start();
-        assert.equal(counts.start, 2, `should have 2 starts`);
-
-        stopwatch.reset(true);
-        assert.equal(counts.reset, 1, `should have 1 stop`);
-        assert.equal(counts.stop, 2, `should have 2 stops, since reset also stops`);
+        assertStopwatchListeners(assert, stopwatch, this.nativeTimer);
     });
 });

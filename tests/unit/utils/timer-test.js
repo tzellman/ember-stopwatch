@@ -114,6 +114,8 @@ module('Unit | Utility | timer', function (hooks) {
         const expiredHandler = onHandler.bind(this);
 
         timer.on('expired', expiredHandler);
+        // make sure the handler was subscribed
+        assert.ok(timer.has('expired'));
 
         timer.start();
         this.nativeTimer.tick(300);

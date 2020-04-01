@@ -41,6 +41,10 @@ export default class StopwatchService extends Service {
         return this.stopwatch.off(event, target, method);
     }
 
+    has(name) {
+        return this.stopwatch.has(name);
+    }
+
     get variance() {
         return this.stopwatch.variance;
     }
