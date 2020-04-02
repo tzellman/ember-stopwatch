@@ -28,6 +28,15 @@ ember install ember-stopwatch
 
 ### Stopwatch
 
+A `Stopwatch` is a utility that allows you to be notified when `ticks` occur,
+making it easy for you to asynchronously take action on time-based boundaries.
+
+The `Stopwatch` uses `@tracked` properties so your application
+can react to changes in time, based on the tick interval.
+
+The `stop` and `reset` methods allow you to either stop on the next tick interval,
+or forcefully (i.e. immediately).
+
 #### As a utility
 
 This is the primary use-case, and allows you to create multiple stopwatches anywhere
@@ -70,24 +79,72 @@ export default class extends Component {
 
 ### Timer
 
-#### As a utility
+A `Timer` is a utility that extends the `Stopwatch` behavior described above,
+except that the use-case is to handle "countdown" eventing. This enables your
+application to react to a `timeout` event.
 
-This is the primary use-case, and allows you to create multiple stopwatches anywhere
-in your application.
+Additionally, the `Timer` can be paused and restarted and contains reactful state
+properties (e.g. `remainingMillis` and `isExpired`).
 
 ```javascript
-import Timer from "ember-stopwatch/utils/stopwatch";
+import Timer from "ember-stopwatch/utils/timer";
 
 // ...
 let timer = new Timer(60000);
-timer.on("expired", someExpirationHandler);
+timer.on("expired", this, expirationHandler);
 timer.start();
 // ...
+
+expirationHandler(){
+    console.log('Time is up!');
+}
 ```
 
 ```handlebars
     {{this.timer.remainingMillis}}
     {{this.timer.isExpired}}
+```
+
+### Clock
+
+#### As a utility
+
+A `Clock` is a utility that tracks time ticks for the current system time.
+
+A `Clock` triggers events on time ticks, including `second`, `minute`, `hour`, `day`,
+and also provides reactful `time` and `date` properties.
+
+```javascript
+import Clock from "ember-stopwatch/utils/clock";
+
+// ...
+let clock = new Clock();
+clock.on("second", myHandler.bind(this, "second"));
+clock.on("minute", myHandler.bind(this, "minute"));
+clock.start();
+// ...
+
+myHandler(type){
+    console.log(`${type} ticked`);
+}
+```
+
+```handlebars
+    {{this.clock.time}}
+```
+
+#### As a Service
+
+A `clock` service can be used that is shared globally in your application.
+
+```javascript
+export default class extends Component {
+    @service clock;
+}
+```
+
+```handlebars
+    {{moment-format this.clock.time}}
 ```
 
 ## Compatibility

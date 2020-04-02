@@ -93,6 +93,26 @@ module('Unit | Utility | timer', function (hooks) {
         assert.equal(timer.remainingMillis, 500, `timer expiration is accurate`);
     });
 
+    test('checks that pause works', function (assert) {
+        let timer = new Timer(1000);
+        timer.start();
+
+        this.nativeTimer.tick(200);
+
+        // force pause
+        timer.pause(true);
+        this.nativeTimer.tick(800);
+        assert.equal(timer.remainingMillis, 800, `timer expiration did not change`);
+
+        timer.start();
+        this.nativeTimer.tick(200);
+        assert.equal(timer.remainingMillis, 600, `timer expiration is accurate`);
+
+        timer.pause();
+        this.nativeTimer.tick(800);
+        assert.equal(timer.remainingMillis, 500, `timer expiration is accurate`);
+    });
+
     test('checks that restart works', function (assert) {
         let timer = new Timer(1000);
         timer.start();

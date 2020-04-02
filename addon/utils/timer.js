@@ -4,7 +4,7 @@ import Stopwatch, { DEFAULT_TICK_MILLIS } from './stopwatch';
 export const DEFAULT_RESOLUTION_MILLIS = DEFAULT_TICK_MILLIS;
 
 /**
- * In addition to the events emitted by Stopwatch, the Timer also emits: expired, restart
+ * In addition to the events emitted by Stopwatch, the Timer also emits: expired, restart, pause
  */
 export default class Timer extends Stopwatch {
     constructor(expirationMillis, tickMillis = DEFAULT_RESOLUTION_MILLIS) {
@@ -24,6 +24,12 @@ export default class Timer extends Stopwatch {
         this.reset(true);
         this.start();
         this.trigger('restart', this);
+    }
+
+    // this is a domain convenience that just calls stop()
+    pause(force = false) {
+        this.stop(force);
+        this.trigger('pause', this);
     }
 
     get remainingMillis() {
