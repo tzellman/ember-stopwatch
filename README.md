@@ -25,6 +25,7 @@ ember install ember-stopwatch
 
 -   [Stopwatch](#stopwatch)
 -   [Timer](#timer)
+-   [Clock](#clock)
 
 ### Stopwatch
 
