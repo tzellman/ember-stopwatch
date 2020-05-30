@@ -26,7 +26,7 @@
     "test:ember-compatibility": "ember try:each"
   },
   "dependencies": {
-    "ember-cli-babel": "^7.19.0",
+    "ember-cli-babel": "^7.20.4",
     "ember-cli-htmlbars": "^4.3.1"
   },
   "devDependencies": {
@@ -35,7 +35,7 @@
     "@glimmer/component": "^1.0.0",
     "@glimmer/tracking": "^1.0.0",
     "@sinonjs/fake-timers": "^6.0.1",
-    "autoprefixer": "^9.7.6",
+    "autoprefixer": "^9.8.0",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
     "ember-auto-import": "^1.5.3",
@@ -56,9 +56,9 @@
     "ember-moment": "^8.0.0",
     "ember-qunit": "^4.6.0",
     "ember-resolver": "^7.0.0",
-    "ember-source": "~3.18.1",
+    "ember-source": "~3.19.0",
     "ember-source-channel-url": "^2.0.1",
-    "ember-template-lint": "^2.7.0",
+    "ember-template-lint": "^2.8.0",
     "ember-truth-helpers": "^2.1.0",
     "ember-try": "^1.4.0",
     "eslint": "^6.8.0",
