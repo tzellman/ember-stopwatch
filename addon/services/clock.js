@@ -8,7 +8,14 @@ export default class ClockService extends Service {
     init() {
         super.init(...arguments);
         this.clock.start();
+        this.clock.on('tick', this, this.updateTrackedDivisions);
+        this.updateTrackedDivisions();
     }
+
+    @tracked second;
+    @tracked minute;
+    @tracked hour;
+    @tracked day;
 
     get time() {
         return this.clock.time;
@@ -30,8 +37,33 @@ export default class ClockService extends Service {
         return this.clock.has(name);
     }
 
+    /**
+     * The usage of `@tracked` and the guards in place are intentional
+     * optomizations meant to prevent litening properties from recomputing.
+     * I believe old version of Ember used to optimize for this and prevent
+     * listeners from recomputing if the value was the same. This is useful
+     * for guarding against excessive template helper calls as a clock is
+     * always yielding new time values on every tick.
+     */
+    updateTrackedDivisions() {
+        this.second = this.clock.second;
+
+        if (this.minute !== this.clock.minute) {
+            this.minute = this.clock.minute;
+        }
+
+        if (this.hour !== this.clock.hour) {
+            this.hour = this.clock.hour;
+        }
+
+        if (this.day !== this.clock.day) {
+            this.day = this.clock.day;
+        }
+    }
+
     willDestroy() {
         super.willDestroy(...arguments);
         this.clock.stop(true);
+        this.clock.off('tick', this, this.updateTrackedDivisions);
     }
 }

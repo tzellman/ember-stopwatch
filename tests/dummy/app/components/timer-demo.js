@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import Timer from 'ember-stopwatch/utils/timer';
 import { tracked } from 'tracked-built-ins';
 
-export default class StopwatchDemoComponent extends Component {
+export default class TimerDemoComponent extends Component {
     @tracked secondTimer = new Timer(1000);
     @tracked tenSecondTimer = new Timer(10000);
     @tracked minuteTimer = new Timer(60000);
