@@ -3,23 +3,18 @@
     "extends": ["config:base"],
     "major": {
         "enabled": true,
-        "stabilityDays": 3,
+        "stabilityDays": 2,
         "prCreation": "not-pending",
         "groupName": "major dependencies"
     },
     "minor": {
         "enabled": true,
-        "stabilityDays": 2,
         "prCreation": "not-pending",
-        "groupName": "minor dependencies",
-        "automerge": true,
-        "automergeType": "pr"
+        "groupName": "minor dependencies"
     },
     "patch": {
         "enabled": true,
-        "groupName": "patch dependencies",
-        "automerge": true,
-        "automergeType": "pr"
+        "groupName": "patch dependencies"
     },
     "pin": {
         "enabled": false
@@ -32,7 +27,6 @@
         }
     ],
     "enabledManagers": ["npm", "travis"],
-    "masterIssue": true,
     "labels": ["deps"],
     "prBodyNotes": ["cc @tzellman"]
 }
