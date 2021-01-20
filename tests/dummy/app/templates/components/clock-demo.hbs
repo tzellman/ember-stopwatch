@@ -2,8 +2,49 @@
     <div
         class="grid grid-flow-col grid-rows-1 gap-4 items-start"
     >
-        <div class="bg-white rounded p-2 font-mono">
-            {{moment-format this.clock.time}}
+        <div class="bg-white rounded p-2">
+            <div class="font-bold text-2xl underline">
+                Second Clock
+            </div>
+            <div class="font-thin">
+                Refreshes every second
+            </div>
+            <div class="font-mono" data-test-second-clock>
+                {{moment-format this.clock.time}}
+            </div>
+        </div>
+        <div class="bg-white rounded p-2">
+            <div class="font-bold text-2xl underline">
+                Minute Clock
+            </div>
+            <div class="font-thin">
+                Refreshes every minute
+            </div>
+            <div class="font-mono" data-test-minute-clock>
+                {{moment-format this.timeByTheMinute}}
+            </div>
+        </div>
+        <div class="bg-white rounded p-2">
+            <div class="font-bold text-2xl underline">
+                Hour Clock
+            </div>
+            <div class="font-thin">
+                Refreshes every hour
+            </div>
+            <div class="font-mono" data-test-hour-clock>
+                {{moment-format this.timeByTheHour}}
+            </div>
+        </div>
+        <div class="bg-white rounded p-2">
+            <div class="font-bold text-2xl underline">
+                Day Clock
+            </div>
+            <div class="font-thin">
+                Refreshes every day
+            </div>
+            <div class="font-mono" data-test-day-clock>
+                {{moment-format this.timeByTheDay}}
+            </div>
         </div>
     </div>
 </div>

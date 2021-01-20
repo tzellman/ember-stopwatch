@@ -112,8 +112,8 @@ expirationHandler(){
 
 A `Clock` is a utility that tracks time ticks for the current system time.
 
-A `Clock` triggers events on time ticks, including `second`, `minute`, `hour`, `day`,
-and also provides reactful `time` and `date` properties.
+A `Clock` triggers events on time ticks, including `second`, `minute`, `hour`, and `day`.
+A `Clock` also provides reactful `time`, `date`, `second`, `minute`, `hour`, and `day` properties.
 
 ```javascript
 import Clock from "ember-stopwatch/utils/clock";
@@ -136,7 +136,8 @@ myHandler(type){
 
 #### As a Service
 
-A `clock` service can be used that is shared globally in your application.
+A `clock` service automatically creates and starts a single instance of the `Clock` utility and is a proxy for properties and methods of a clock instance.
+A `clock` service also has `@tracked` versions of the clock properties `second`, `minute`, `hour`, and `day` that can be used by the `@computed` macro to react to.
 
 ```javascript
 export default class extends Component {
@@ -146,6 +147,34 @@ export default class extends Component {
 
 ```handlebars
     {{moment-format this.clock.time}}
+```
+
+```javascript
+export default class extends Component {
+    @service clock;
+
+    @computed("clock.minute")
+    get timeByTheMinute() {
+        return new Date().getTime();
+    }
+
+    @computed("clock.hour")
+    get timeByTheHour() {
+        return new Date().getTime();
+    }
+
+    @computed("clock.day")
+    get timeByTheDay() {
+        return new Date().getTime();
+    }
+}
+```
+
+```handlebars
+    Refreshes every second: {{moment-format this.clock.time}}
+    Refreshes every minute: {{moment-format this.timeByTheMinute}}
+    Refreshes every hour: {{moment-format this.timeByTheHour}}
+    Refreshes every day: {{moment-format this.timeByTheDay}}
 ```
 
 ## Compatibility
