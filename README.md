@@ -193,8 +193,8 @@ This project is licensed under the [MIT License](LICENSE.md).
 
 [npm-badge-img]: https://badge.fury.io/js/ember-stopwatch.svg
 [npm-badge-link]: http://badge.fury.io/js/ember-stopwatch
-[build-status-img]: https://travis-ci.org/tzellman/ember-stopwatch.svg?branch=master
-[build-status-link]: https://travis-ci.org/tzellman/ember-stopwatch
+[build-status-img]: https://github.com/tzellman/ember-stopwatch/workflows/Build/badge.svg?branch=master&event=push
+[build-status-link]: https://github.com/tzellman/ember-stopwatch/actions?query=workflow%3A%22Build%22
 [npm-downloads-img]: https://img.shields.io/npm/dt/ember-stopwatch.svg
 [ember-observer-badge]: http://emberobserver.com/badges/ember-stopwatch.svg
 [ember-observer-url]: http://emberobserver.com/addons/ember-stopwatch
