@@ -47,7 +47,7 @@ jobs:
                   npm run test:ember
 
             - name: Coverage
-              if: env.coverage
+              if: ${{ matrix.coverage }}
               run: |
                   npm ci
                   COVERAGE=true node_modules/.bin/ember try:one ${{ matrix.ember }}
