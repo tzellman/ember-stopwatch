@@ -1,6 +1,6 @@
 {
   "name": "ember-stopwatch",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Stopwatches, timers, clocks, oh my!",
   "keywords": ["ember-addon", "stopwatch", "timer", "clock"],
   "repository": "https://github.com/tzellman/ember-stopwatch.git",

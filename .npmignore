@@ -1,6 +1,7 @@
 # compiled output
 /dist/
 /tmp/
+/.idea
 
 # dependencies
 /bower_components/
@@ -16,12 +17,15 @@
 /.git/
 /.github/
 /.gitignore
+/.prettierignore
+/.prettierrc
 /.template-lintrc.js
 /.watchmanconfig
 /bower.json
 /config/ember-try.js
 /CONTRIBUTING.md
 /ember-cli-build.js
+/renovate.json
 /testem.js
 /tests/
 /yarn.lock
