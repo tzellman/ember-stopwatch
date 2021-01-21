@@ -32,8 +32,8 @@
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
     "@ember/render-modifiers": "^1.0.2",
-    "@glimmer/component": "^1.0.2",
-    "@glimmer/tracking": "^1.0.2",
+    "@glimmer/component": "^1.0.3",
+    "@glimmer/tracking": "^1.0.3",
     "@sinonjs/fake-timers": "^6.0.1",
     "autoprefixer": "^9.8.6",
     "babel-eslint": "^10.1.0",
