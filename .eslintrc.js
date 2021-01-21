@@ -10,13 +10,14 @@ module.exports = {
             legacyDecorators: true
         }
     },
-    plugins: ['ember'],
+    plugins: ['ember', 'prettier'],
     extends: ['eslint:recommended', 'plugin:ember/recommended', 'plugin:prettier/recommended'],
     env: {
         browser: true
     },
     rules: {
-        'ember/no-jquery': 'error'
+        'ember/no-jquery': 'error',
+        'prettier/prettier': ['error', { usePrettierrc: true }]
     },
     overrides: [
         // node files
