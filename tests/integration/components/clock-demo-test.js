@@ -17,43 +17,52 @@ module('Integration | Component | ClockDemo', function (hooks) {
         this.nativeTimer.uninstall();
     });
 
+    const assertEqualTrim = (assert, s1, s2, msg) => assert.equal((s1 || '').trim(), (s2 || '').trim(), msg);
+    // NOTE: On Ember 3.12 the notEqual helper adds a NOT in the result value... hence why I'm using notOk
+    const assertNotEqualTrim = (assert, s1, s2, msg) => assert.notOk((s1 || '').trim() === (s2 || '').trim(), msg);
+
     test('should render new values for each clock type, but only when respective time divisions change', async function (assert) {
         await render(hbs`<ClockDemo/>`);
 
-        const originalSecondClock = find('[data-test-second-clock]').textContent;
-        const originalMinuteClock = find('[data-test-minute-clock]').textContent;
-        const originalHourClock = find('[data-test-hour-clock]').textContent;
-        const originalDayClock = find('[data-test-day-clock]').textContent;
+        const secondClockSelector = '[data-test-second-clock]';
+        const minuteClockSelector = '[data-test-minute-clock]';
+        const hourClockSelector = '[data-test-hour-clock]';
+        const dayClockSelector = '[data-test-day-clock]';
+
+        const originalSecondClock = find(secondClockSelector).textContent;
+        const originalMinuteClock = find(minuteClockSelector).textContent;
+        const originalHourClock = find(hourClockSelector).textContent;
+        const originalDayClock = find(dayClockSelector).textContent;
 
         this.nativeTimer.tick(1000); // Move forward a second
         await this.nativeTimer.nextAsync();
 
-        assert.notEqual(find('[data-test-second-clock]').textContent, originalSecondClock);
-        assert.equal(find('[data-test-minute-clock]').textContent, originalMinuteClock);
-        assert.equal(find('[data-test-hour-clock]').textContent, originalHourClock);
-        assert.equal(find('[data-test-day-clock]').textContent, originalDayClock);
+        assertNotEqualTrim(assert, find(secondClockSelector).textContent, originalSecondClock, 'seconds should change');
+        assertEqualTrim(assert, find(minuteClockSelector).textContent, originalMinuteClock, 'no change to minutes');
+        assertEqualTrim(assert, find(hourClockSelector).textContent, originalHourClock, 'no change to hour');
+        assertEqualTrim(assert, find(dayClockSelector).textContent, originalDayClock, 'no change to day');
 
         this.nativeTimer.tick(1000 * 60); // Move forward a minute
         await this.nativeTimer.nextAsync();
 
-        assert.notEqual(find('[data-test-second-clock]').textContent, originalSecondClock);
-        assert.notEqual(find('[data-test-minute-clock]').textContent, originalMinuteClock);
-        assert.equal(find('[data-test-hour-clock]').textContent, originalHourClock);
-        assert.equal(find('[data-test-day-clock]').textContent, originalDayClock);
+        assertNotEqualTrim(assert, find(secondClockSelector).textContent, originalSecondClock, 'seconds should change');
+        assertNotEqualTrim(assert, find(minuteClockSelector).textContent, originalMinuteClock, 'minutes should change');
+        assertEqualTrim(assert, find(hourClockSelector).textContent, originalHourClock, 'no change to hour');
+        assertEqualTrim(assert, find(dayClockSelector).textContent, originalDayClock, 'no change to day');
 
         this.nativeTimer.tick(1000 * 60 * 60); // Move forward an hour
         await this.nativeTimer.nextAsync();
 
-        assert.notEqual(find('[data-test-second-clock]').textContent, originalSecondClock);
-        assert.notEqual(find('[data-test-minute-clock]').textContent, originalMinuteClock);
-        assert.notEqual(find('[data-test-hour-clock]').textContent, originalHourClock);
-        assert.equal(find('[data-test-day-clock]').textContent, originalDayClock);
+        assertNotEqualTrim(assert, find(secondClockSelector).textContent, originalSecondClock, 'seconds should change');
+        assertNotEqualTrim(assert, find(minuteClockSelector).textContent, originalMinuteClock, 'minutes should change');
+        assertNotEqualTrim(assert, find(hourClockSelector).textContent, originalHourClock, 'hour should change');
+        assertEqualTrim(assert, find(dayClockSelector).textContent, originalDayClock, 'no change to day');
 
         this.nativeTimer.tick(1000 * 60 * 60 * 24); // Move forward a day
         await this.nativeTimer.nextAsync();
-        assert.notEqual(find('[data-test-second-clock]').textContent, originalSecondClock);
-        assert.notEqual(find('[data-test-minute-clock]').textContent, originalMinuteClock);
-        assert.notEqual(find('[data-test-hour-clock]').textContent, originalHourClock);
-        assert.notEqual(find('[data-test-day-clock]').textContent, originalDayClock);
+        assertNotEqualTrim(assert, find(secondClockSelector).textContent, originalSecondClock, 'seconds should change');
+        assertNotEqualTrim(assert, find(minuteClockSelector).textContent, originalMinuteClock, 'minutes should change');
+        assertNotEqualTrim(assert, find(hourClockSelector).textContent, originalHourClock, 'hour should change');
+        assertNotEqualTrim(assert, find(dayClockSelector).textContent, originalDayClock, 'day should change');
     });
 });
