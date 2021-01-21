@@ -5,8 +5,8 @@ import Clock from '../utils/clock';
 export default class ClockService extends Service {
     @tracked clock = new Clock();
 
-    init() {
-        super.init(...arguments);
+    constructor() {
+        super(...arguments);
         this.clock.start();
         this.clock.on('tick', this, this.updateTrackedDivisions);
         this.updateTrackedDivisions();

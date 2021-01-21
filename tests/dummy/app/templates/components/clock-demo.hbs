@@ -1,4 +1,8 @@
-<div class="grid grid-flow-row gap-4 items-start">
+<div
+    class="grid grid-flow-row gap-4 items-start"
+    {{did-insert this.registerListeners}}
+    {{will-destroy this.unregisterListeners}}
+>
     <div
         class="grid grid-flow-col grid-rows-1 gap-4 items-start"
     >
