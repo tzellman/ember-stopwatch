@@ -26,7 +26,7 @@
     "test:ember-compatibility": "ember try:each"
   },
   "dependencies": {
-    "ember-cli-babel": "^7.23.0",
+    "ember-cli-babel": "^7.23.1",
     "ember-cli-htmlbars": "^5.3.1"
   },
   "devDependencies": {
@@ -56,7 +56,7 @@
     "ember-moment": "^8.0.1",
     "ember-qunit": "^4.6.0",
     "ember-resolver": "^8.0.2",
-    "ember-source": "~3.22.1",
+    "ember-source": "~3.22.2",
     "ember-source-channel-url": "^3.0.0",
     "ember-template-lint": "^2.14.0",
     "ember-truth-helpers": "^3.0.0",
@@ -64,8 +64,8 @@
     "eslint": "^7.13.0",
     "eslint-plugin-ember": "^9.6.0",
     "eslint-plugin-node": "^11.1.0",
-    "husky": "^4.3.0",
-    "lint-staged": "^10.5.1",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.3",
     "loader.js": "^4.7.0",
     "micromatch": "^4.0.2",
     "npm-run-all": "^4.1.5",
