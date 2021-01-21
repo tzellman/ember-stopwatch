@@ -23,7 +23,8 @@
     "packageRules": [
         {
             "paths": ["+(package.json)"],
-            "rangeStrategy": "bump"
+            "rangeStrategy": "bump",
+            "ignoreDeps": ["ember-cli", "tailwindcss"]
         }
     ],
     "enabledManagers": ["npm", "travis"],
