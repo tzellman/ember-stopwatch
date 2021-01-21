@@ -54,8 +54,9 @@ jobs:
                   npm run lint
                   npm run test:ember
 
+            # only run coverage under specific scenarios
             - name: Coverage
-              if: ${{ matrix.coverage }}
+              if: ${{ matrix.coverage && github.ref == 'refs/heads/master' }}
               run: |
                   npm ci
                   COVERAGE=true node_modules/.bin/ember try:one ${{ matrix.ember }}
