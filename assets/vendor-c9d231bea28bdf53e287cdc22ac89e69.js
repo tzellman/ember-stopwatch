@@ -400,7 +400,7 @@ return r<-6?"sameElse":r<-1?"lastWeek":r<0?"lastDay":r<1?"sameDay":r<2?"nextDay"
  *            Portions Copyright 2008-2011 Apple Inc. All rights reserved.
  * @license   Licensed under MIT license
  *            See https://raw.github.com/emberjs/ember.js/master/LICENSE
- * @version   3.24.1
+ * @version   3.24.2
  */
 var e,t,r
 mainContext=this,function(){var n,i
@@ -1273,13 +1273,15 @@ var{routeName:t,models:r,queryParams:n}=(0,u.extractRouteArgs)(e),i=this._router
 return i._keepDefaultQueryParamValues=!0,i}replaceWith(){return this.transitionTo(...arguments).method("replace")}urlFor(e,...t){return this._router.generate(e,...t)}isActive(...e){var{routeName:t,models:r,queryParams:n}=(0,u.extractRouteArgs)(e),i=this._router._routerMicrolib
 return(0,l.consumeTag)((0,l.tagFor)(this._router,"currentURL")),!!i.isActiveIntent(t,r)&&(!(Object.keys(n).length>0)||(n=(0,a.assign)({},n),this._router._prepareQueryParams(t,r,n,!0),(0,u.shallowEqual)(n,i.state.queryParams)))}recognize(e){var t=d(e,this.rootURL)
 return this._router._routerMicrolib.recognize(t)}recognizeAndLoad(e){var t=d(e,this.rootURL)
-return this._router._routerMicrolib.recognizeAndLoad(t)}}e.default=h,h.reopen(r.Evented,{currentRouteName:(0,s.readOnly)("_router.currentRouteName"),currentURL:(0,s.readOnly)("_router.currentURL"),location:(0,s.readOnly)("_router.location"),rootURL:(0,s.readOnly)("_router.rootURL"),currentRoute:(0,s.readOnly)("_router.currentRoute")})})),e("@ember/-internals/routing/lib/services/routing",["exports","@ember/object/computed","@ember/polyfills","@ember/service"],(function(e,t,r,n){"use strict"
+return this._router._routerMicrolib.recognizeAndLoad(t)}}e.default=h,h.reopen(r.Evented,{currentRouteName:(0,s.readOnly)("_router.currentRouteName"),currentURL:(0,s.readOnly)("_router.currentURL"),location:(0,s.readOnly)("_router.location"),rootURL:(0,s.readOnly)("_router.rootURL"),currentRoute:(0,s.readOnly)("_router.currentRoute")})})),e("@ember/-internals/routing/lib/services/routing",["exports","@ember/-internals/owner","@ember/-internals/utils","@ember/object/computed","@ember/polyfills","@ember/service"],(function(e,t,r,n,i,s){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-class i extends n.default{hasRoute(e){return this.router.hasRoute(e)}transitionTo(e,t,r,n){var i=this.router._doTransition(e,t,r)
-return n&&i.method("replace"),i}normalizeQueryParams(e,t,r){this.router._prepareQueryParams(e,t,r)}generateURL(e,t,n){var i=this.router
-if(i._routerMicrolib){var s={}
-return n&&((0,r.assign)(s,n),this.normalizeQueryParams(e,t,s)),i.generate(e,...t,{queryParams:s})}}isActiveForRoute(e,t,r,n){var i=this.router._routerMicrolib.recognizer.handlersFor(r),s=i[i.length-1].handler,a=function(e,t){for(var r=0,n=0;n<t.length&&(r+=t[n].names.length,t[n].handler!==e);n++);return r}(r,i)
-return e.length>a&&(r=s),n.isActiveIntent(r,e,t)}}e.default=i,i.reopen({targetState:(0,t.readOnly)("router.targetState"),currentState:(0,t.readOnly)("router.currentState"),currentRouteName:(0,t.readOnly)("router.currentRouteName"),currentPath:(0,t.readOnly)("router.currentPath")})})),e("@ember/-internals/routing/lib/system/cache",["exports"],(function(e){"use strict"
+var a=(0,r.symbol)("ROUTER")
+class o extends s.default{get router(){var e=this[a]
+return void 0!==e?e:((e=(0,t.getOwner)(this).lookup("router:main")).setupRouter(),this[a]=e)}hasRoute(e){return this.router.hasRoute(e)}transitionTo(e,t,r,n){var i=this.router._doTransition(e,t,r)
+return n&&i.method("replace"),i}normalizeQueryParams(e,t,r){this.router._prepareQueryParams(e,t,r)}generateURL(e,t,r){var n=this.router
+if(n._initialTransitionStarted){var s={}
+return r&&((0,i.assign)(s,r),this.normalizeQueryParams(e,t,s)),n.generate(e,...t,{queryParams:s})}}isActiveForRoute(e,t,r,n){var i=this.router._routerMicrolib.recognizer.handlersFor(r),s=i[i.length-1].handler,a=function(e,t){for(var r=0,n=0;n<t.length&&(r+=t[n].names.length,t[n].handler!==e);n++);return r}(r,i)
+return e.length>a&&(r=s),n.isActiveIntent(r,e,t)}}e.default=o,o.reopen({targetState:(0,n.readOnly)("router.targetState"),currentState:(0,n.readOnly)("router.currentState"),currentRouteName:(0,n.readOnly)("router.currentRouteName"),currentPath:(0,n.readOnly)("router.currentPath")})})),e("@ember/-internals/routing/lib/system/cache",["exports"],(function(e){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 e.default=class{constructor(){this.cache=new Map}has(e){return this.cache.has(e)}stash(e,t,r){var n=this.cache.get(e)
 void 0===n&&(n=new Map,this.cache.set(e,n)),n.set(t,r)}lookup(e,t,r){if(!this.has(e))return r
@@ -1409,7 +1411,7 @@ var O=g
 e.default=O})),e("@ember/-internals/routing/lib/system/router",["exports","@ember/-internals/metal","@ember/-internals/owner","@ember/-internals/runtime","@ember/debug","@ember/deprecated-features","@ember/error","@ember/polyfills","@ember/runloop","@ember/-internals/routing/lib/location/api","@ember/-internals/routing/lib/utils","@ember/-internals/routing/lib/system/dsl","@ember/-internals/routing/lib/system/route","@ember/-internals/routing/lib/system/router_state","router_js"],(function(e,t,r,n,i,s,a,o,l,u,c,d,h,p,f){"use strict"
 function m(e){x(this),this._cancelSlowTransitionTimer(),this.notifyPropertyChange("url"),this.set("currentState",this.targetState),(0,l.once)(this,this.trigger,"didTransition")}function v(e,t,r){(0,l.once)(this,this.trigger,"willTransition",r)}function g(){return this}Object.defineProperty(e,"__esModule",{value:!0}),e.triggerEvent=k,e.default=void 0
 var{slice:b}=Array.prototype
-class y extends n.Object{constructor(){super(...arguments),this._didSetupRouter=!1,this.currentURL=null,this.currentRouteName=null,this.currentPath=null,this.currentRoute=null,this._qpCache=Object.create(null),this._qpUpdates=new Set,this._queuedQPChanges={},this._toplevelView=null,this._handledErrors=new Set,this._engineInstances=Object.create(null),this._engineInfoByRoute=Object.create(null),this.currentState=null,this.targetState=null,this._resetQueuedQueryParameterChanges()}_initRouterJs(){var e=(0,t.get)(this,"location"),n=this,i=(0,r.getOwner)(this),a=Object.create(null)
+class y extends n.Object{constructor(){super(...arguments),this._didSetupRouter=!1,this._initialTransitionStarted=!1,this.currentURL=null,this.currentRouteName=null,this.currentPath=null,this.currentRoute=null,this._qpCache=Object.create(null),this._qpUpdates=new Set,this._queuedQPChanges={},this._toplevelView=null,this._handledErrors=new Set,this._engineInstances=Object.create(null),this._engineInfoByRoute=Object.create(null),this.currentState=null,this.targetState=null,this._resetQueuedQueryParameterChanges()}_initRouterJs(){var e=(0,t.get)(this,"location"),n=this,i=(0,r.getOwner)(this),a=Object.create(null)
 class o extends f.default{getRoute(e){var t=e,r=i,s=n._engineInfoByRoute[t]
 s&&(r=n._getEngineInstance(s),t=s.localFullName)
 var o=`route:${t}`,l=r.lookup(o)
@@ -1439,11 +1441,12 @@ else{var p=(0,r.getOwner)(this),f=p.factoryFor("view:-outlet")
 this._toplevelView=f.create(),this._toplevelView.setOutletState(n)
 var m=p.lookup("-application-instance:main")
 m&&m.didCreateRootView(this._toplevelView)}}}}handleURL(e){var t=e.split(/#(.+)?/)[0]
-return this._doURLTransition("handleURL",t)}_doURLTransition(e,t){var r=this._routerMicrolib[e](t||"/")
+return this._doURLTransition("handleURL",t)}_doURLTransition(e,t){this._initialTransitionStarted=!0
+var r=this._routerMicrolib[e](t||"/")
 return M(r,this),r}transitionTo(...e){if((0,c.resemblesURL)(e[0]))return this._doURLTransition("transitionTo",e[0])
 var{routeName:t,models:r,queryParams:n}=(0,c.extractRouteArgs)(e)
 return this._doTransition(t,r,n)}intermediateTransitionTo(e,...t){this._routerMicrolib.intermediateTransitionTo(e,...t),x(this)}replaceWith(...e){return this.transitionTo(...e).method("replace")}generate(e,...t){var r=this._routerMicrolib.generate(e,...t)
-return this.location.formatURL(r)}isActive(e){return this._routerMicrolib.isActive(e)}isActiveIntent(e,t,r){return this.currentState.isActiveIntent(e,t,r)}send(e,...t){this._routerMicrolib.trigger(e,...t)}hasRoute(e){return this._routerMicrolib.hasRoute(e)}reset(){this._didSetupRouter=!1,this._routerMicrolib&&this._routerMicrolib.reset()}willDestroy(){this._toplevelView&&(this._toplevelView.destroy(),this._toplevelView=null),this._super(...arguments),this.reset()
+return this.location.formatURL(r)}isActive(e){return this._routerMicrolib.isActive(e)}isActiveIntent(e,t,r){return this.currentState.isActiveIntent(e,t,r)}send(e,...t){this._routerMicrolib.trigger(e,...t)}hasRoute(e){return this._routerMicrolib.hasRoute(e)}reset(){this._didSetupRouter=!1,this._initialTransitionStarted=!1,this._routerMicrolib&&this._routerMicrolib.reset()}willDestroy(){this._toplevelView&&(this._toplevelView.destroy(),this._toplevelView=null),this._super(...arguments),this.reset()
 var e=this._engineInstances
 for(var t in e)for(var r in e[t])(0,l.run)(e[t][r],"destroy")}_activeQPChanged(e,t){this._queuedQPChanges[e]=t,(0,l.once)(this,this._fireQueryParamTransition)}_updatingQPChanged(e){this._qpUpdates.add(e)}_fireQueryParamTransition(){this.transitionTo({queryParams:this._queuedQPChanges}),this._resetQueuedQueryParameterChanges()}_setupLocation(){var e=this.location,n=this.rootURL,i=(0,r.getOwner)(this)
 if("string"==typeof e&&i){var s=i.lookup(`location:${e}`)
@@ -1453,7 +1456,9 @@ e=(0,t.set)(this,"location",u.default.create(a))}}null!==e&&"object"==typeof e&&
 else{if(void 0===r)return
 t[e]=this._serializeQueryParam(r,(0,n.typeOf)(r))}}))}_serializeQueryParam(e,t){return null==e?e:"array"===t?JSON.stringify(e):`${e}`}_deserializeQueryParams(e,t){P(this,e,t,((e,r,n)=>{n&&(delete t[e],t[n.prop]=n.route.deserializeQueryParam(r,n.urlKey,n.type))}))}_deserializeQueryParam(e,t){return null==e?e:"boolean"===t?"true"===e:"number"===t?Number(e).valueOf():"array"===t?(0,n.A)(JSON.parse(e)):e}_pruneDefaultQueryParamValues(e,t){var r=this._queryParamsFor(e)
 for(var n in t){var i=r.map[n]
-i&&i.serializedDefaultValue===t[n]&&delete t[n]}}_doTransition(e,t,r,n){var i=e||(0,c.getActiveTargetName)(this._routerMicrolib),s={}
+i&&i.serializedDefaultValue===t[n]&&delete t[n]}}_doTransition(e,t,r,n){var i=e||(0,c.getActiveTargetName)(this._routerMicrolib)
+this._initialTransitionStarted=!0
+var s={}
 this._processActiveTransitionQueryParams(i,t,s,r),(0,o.assign)(s,r),this._prepareQueryParams(i,t,s,Boolean(n))
 var a=this._routerMicrolib.transitionTo(i,...t,{queryParams:s})
 return M(a,this),a}_processActiveTransitionQueryParams(e,t,r,n){if(this._routerMicrolib.activeTransition){var i={},s=this._qpUpdates,a=(0,h.getFullQueryParams)(this,this._routerMicrolib.activeTransition[f.STATE_SYMBOL])
@@ -2101,7 +2106,7 @@ s.topsort(t)}})
 function v(e){var t={namespace:e}
 return((0,l.get)(e,"Resolver")||u.default).create(t)}function g(e,t){return function(t){if(void 0!==this.superclass[e]&&this.superclass[e]===this[e]){var r={}
 r[e]=Object.create(this[e]),this.reopenClass(r)}this[e][t.name]=t}}m.reopenClass({initializers:Object.create(null),instanceInitializers:Object.create(null),initializer:g("initializers","initializer"),instanceInitializer:g("instanceInitializers","instance initializer"),buildRegistry(e){var t=new s.Registry({resolver:v(e)})
-return t.set=l.set,t.register("application:main",e,{instantiate:!1}),function(e){e.optionsForType("component",{singleton:!1}),e.optionsForType("view",{singleton:!1}),e.register("controller:basic",n.default,{instantiate:!1}),e.injection("renderer","_viewRegistry","-view-registry:main"),e.injection("route","_topLevelViewTemplate","template:-outlet"),e.injection("view:-outlet","namespace","application:main"),e.injection("controller","target","router:main"),e.injection("controller","namespace","application:main"),e.injection("router","_bucketCache",s.privatize`-bucket-cache:main`),e.injection("route","_bucketCache",s.privatize`-bucket-cache:main`),e.injection("route","_router","router:main"),e.register("service:-routing",d.RoutingService),e.injection("service:-routing","router","router:main"),e.register("resolver-for-debugging:main",e.resolver,{instantiate:!1}),e.injection("container-debug-adapter:main","resolver","resolver-for-debugging:main"),e.injection("data-adapter:main","containerDebugAdapter","container-debug-adapter:main"),e.register("container-debug-adapter:main",h.ContainerDebugAdapter),e.register("component-lookup:main",p.ComponentLookup)}(t),(0,f.setupEngineRegistry)(t),t},resolver:null,Resolver:null})
+return t.set=l.set,t.register("application:main",e,{instantiate:!1}),function(e){e.optionsForType("component",{singleton:!1}),e.optionsForType("view",{singleton:!1}),e.register("controller:basic",n.default,{instantiate:!1}),e.injection("renderer","_viewRegistry","-view-registry:main"),e.injection("route","_topLevelViewTemplate","template:-outlet"),e.injection("view:-outlet","namespace","application:main"),e.injection("controller","target","router:main"),e.injection("controller","namespace","application:main"),e.injection("router","_bucketCache",s.privatize`-bucket-cache:main`),e.injection("route","_bucketCache",s.privatize`-bucket-cache:main`),e.injection("route","_router","router:main"),e.register("service:-routing",d.RoutingService),e.register("resolver-for-debugging:main",e.resolver,{instantiate:!1}),e.injection("container-debug-adapter:main","resolver","resolver-for-debugging:main"),e.injection("data-adapter:main","containerDebugAdapter","container-debug-adapter:main"),e.register("container-debug-adapter:main",h.ContainerDebugAdapter),e.register("component-lookup:main",p.ComponentLookup)}(t),(0,f.setupEngineRegistry)(t),t},resolver:null,Resolver:null})
 var b=m
 e.default=b})),e("@ember/engine/instance",["exports","@ember/-internals/runtime","@ember/debug","@ember/error","@ember/-internals/container","@ember/-internals/utils","@ember/engine/lib/engine-parent"],(function(e,t,r,n,i,s,a){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
@@ -3432,7 +3437,7 @@ H.Test=z.Test,H.Test.Adapter=z.Adapter,H.Test.QUnitAdapter=z.QUnitAdapter,H.setu
 var V=H
 e.default=V,n.IS_NODE?n.module.exports=H:r.context.exports.Ember=r.context.exports.Em=H})),e("ember/version",["exports"],(function(e){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-e.default="3.24.1"})),e("node-module/index",["exports"],(function(e){"use strict"
+e.default="3.24.2"})),e("node-module/index",["exports"],(function(e){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.require=e.module=e.IS_NODE=void 0
 var t,r,n="object"==typeof module&&"function"==typeof module.require
 e.IS_NODE=n,e.module=t,e.require=r,n?(e.module=t=module,e.require=r=module.require):(e.module=t=null,e.require=r=null)})),e("route-recognizer",["exports"],(function(e){"use strict"
