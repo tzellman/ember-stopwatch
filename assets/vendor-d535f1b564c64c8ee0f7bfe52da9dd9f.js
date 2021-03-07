@@ -3856,10 +3856,10 @@ e.isDestroying=t
 const r=Ember._isDestroyed
 e.isDestroyed=r})),define("@glimmer/component/-private/ember-component-manager",["exports","@glimmer/component/-private/base-component-manager","@glimmer/component/-private/destroyables"],(function(e,t,r){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
-const n=Ember._componentManagerCapabilities("3.13",{destructor:!0,asyncLifecycleCallbacks:!1,updateHook:!1}),i=Ember.destroy,s=Ember._registerDestructor
-class a extends((0,t.default)(Ember.setOwner,Ember.getOwner,n)){createComponent(e,t){const r=super.createComponent(e,t)
-return s(r,(()=>{r.willDestroy()})),r}destroyComponent(e){i(e)}}var o=a
-e.default=o})),define("@glimmer/component/-private/owner",["exports"],(function(e){"use strict"
+const{setDestroyed:n,setDestroying:i}=r,s=Ember._componentManagerCapabilities("3.13",{destructor:!0,asyncLifecycleCallbacks:!1,updateHook:!1}),a=Ember.destroy,o=Ember._registerDestructor
+class l extends((0,t.default)(Ember.setOwner,Ember.getOwner,s)){createComponent(e,t){const r=super.createComponent(e,t)
+return o(r,(()=>{r.willDestroy()})),r}destroyComponent(e){a(e)}}var u=l
+e.default=u})),define("@glimmer/component/-private/owner",["exports"],(function(e){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.setOwner=void 0
 var t=Ember.setOwner
 e.setOwner=t})),define("@glimmer/component/index",["exports","@glimmer/component/-private/ember-component-manager","@glimmer/component/-private/component"],(function(e,t,r){"use strict"
