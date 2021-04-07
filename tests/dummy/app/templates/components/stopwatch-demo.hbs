@@ -50,12 +50,14 @@
         />
 
         <div class="text-xl flex flex-row items-center my-2">
-            <label>Force stop/reset?</label>
-            <Input
-                @class="rounded ml-2 h-6 w-6"
-                @type="checkbox"
-                @checked={{this.force}}
-            />
+            <label>
+                Force stop/reset?
+                <Input
+                    class="rounded ml-2 h-6 w-6"
+                    @type="checkbox"
+                    @checked={{this.force}}
+                />
+            </label>
         </div>
     </div>
 </div>
