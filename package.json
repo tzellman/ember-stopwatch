@@ -1,6 +1,6 @@
 {
   "name": "ember-stopwatch",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Stopwatches, timers, clocks, oh my!",
   "keywords": [
     "ember-addon",

@@ -30,6 +30,7 @@
 /tests/
 /yarn.lock
 .gitkeep
+commitlint.config.js
 
 # ember-try
 /.node_modules.ember-try/

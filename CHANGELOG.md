@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.4.0
+
+This is a minor release with no new features, mainly dependency updates.
+
+#### Changes
+
+-   Updated to Ember CLI 3.25.3
+-   Bumped versions of most dependencies to latest
+
 ### 0.3.0
 
 This is a minor release with some new backwards-compatible features.
