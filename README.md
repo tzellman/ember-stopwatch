@@ -38,6 +38,34 @@ can react to changes in time, based on the tick interval.
 The `stop` and `reset` methods allow you to either stop on the next tick interval,
 or forcefully (i.e. immediately).
 
+#### As an element modifier
+
+The easiest and quickest way to start adding time utilities to your app is by using the 
+`stopwatch-tick` modifier.
+
+Your action handler will be passed the elapsed time and number of durations (ticks).
+
+Note that the stopwatch will start as soon as your element is inserted and the modifier is 
+instrumented.
+
+```handlebars
+    <div {{stopwatch-tick 1000 (fn (mut this.finishedLoading) true)}}>
+        {{#if this.finishedLoading}}
+            Waited 1 second, loaded!
+        {{/if}}
+    </div>
+```
+
+You can also provide a number of ticks as an optional named parameter.
+
+```handlebars
+    <div {{stopwatch-tick 1000 (fn (mut this.finishedLoading) true) ticks=10}}>
+        {{#if this.finishedLoading}}
+            Waited 10 seconds, loaded!
+        {{/if}}
+    </div>
+```
+
 #### As a utility
 
 This is the primary use-case, and allows you to create multiple stopwatches anywhere
@@ -108,6 +136,28 @@ expirationHandler(){
 
 ### Clock
 
+#### As an element modifier
+
+The `clock-tick` modifier can be used to react to various time tick types, which includes `second`, 
+`minute`, `hour`, and `day`.
+
+Your action handler will be passed the current time (from the clock service), when triggered.
+
+Note that the ticks will be triggered on clock time thresholds, not elapsed time / durations (e.g. 
+when the actual clock rolls over to a new second, minute, hour, etc.).
+
+```javascript
+export default class extends Component {
+    @tracked time
+}
+```
+
+```handlebars
+    <div {{clock-tick "second" (fn (mut this.time))}}>
+        {{moment-format this.time}}
+    </div>
+```
+
 #### As a utility
 
 A `Clock` is a utility that tracks time ticks for the current system time.
@@ -125,7 +175,7 @@ clock.on("minute", myHandler.bind(this, "minute"));
 clock.start();
 // ...
 
-myHandler(type){
+myHandler(type) {
     console.log(`${type} ticked`);
 }
 ```

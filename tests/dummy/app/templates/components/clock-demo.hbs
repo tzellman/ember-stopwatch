@@ -1,7 +1,9 @@
 <div
     class="grid grid-flow-row gap-4 items-start"
-    {{did-insert this.registerListeners}}
-    {{will-destroy this.unregisterListeners}}
+    {{clock-tick "second" (fn (mut this.timeByTheSecond))}}
+    {{clock-tick "minute" (fn (mut this.timeByTheMinute))}}
+    {{clock-tick "hour" (fn (mut this.timeByTheHour))}}
+    {{clock-tick "day" (fn (mut this.timeByTheDay))}}
 >
     <div
         class="grid grid-flow-col grid-rows-1 gap-4 items-start"
@@ -14,7 +16,7 @@
                 Refreshes every second
             </div>
             <div class="font-mono" data-test-second-clock>
-                {{moment-format this.clock.time}}
+                {{moment-format this.timeByTheSecond}}
             </div>
         </div>
         <div class="bg-white rounded p-2">
