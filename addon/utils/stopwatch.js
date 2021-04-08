@@ -17,8 +17,9 @@ export default class Stopwatch extends Evented {
         this.tickMillis = Math.max(0, tickMillis || DEFAULT_TICK_MILLIS);
     }
 
-    start() {
-        if (!this.isRunning) {
+    // use skipCheck in modifiers, to avoid "used previously in same computation" error
+    start(skipCheck = false) {
+        if (skipCheck || !this.isRunning) {
             this.startTime = Date.now();
             this.intervalId = setInterval(() => {
                 this._tick();
