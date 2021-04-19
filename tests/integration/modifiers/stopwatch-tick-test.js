@@ -39,8 +39,8 @@ module('Integration | Modifier | stopwatch-tick', function (hooks) {
         this.set('foo', () => {
             assert.notOk(true, 'Should not have made it here');
         });
-        await render(hbs`<div {{stopwatch-tick "foo" foo}}></div>`);
-        await render(hbs`<div {{stopwatch-tick 0 foo}}></div>`);
+        await render(hbs`<div {{stopwatch-tick "foo" this.foo}}></div>`);
+        await render(hbs`<div {{stopwatch-tick 0 this.foo}}></div>`);
     });
 
     test('it renders with args and named args', async function (assert) {
@@ -55,13 +55,13 @@ module('Integration | Modifier | stopwatch-tick', function (hooks) {
             });
         };
         reset();
-        await render(hbs`<div {{stopwatch-tick 1000 foo}}>{{status}},{{duration}},{{ticks}}</div>`);
+        await render(hbs`<div {{stopwatch-tick 1000 this.foo}}>{{status}},{{duration}},{{ticks}}</div>`);
         assert.equal(this.element.textContent.trim(), 'running,0,0');
         this.nativeTimer.tick(SECOND_RESOLUTION);
         assert.equal(this.element.textContent.trim(), `done,${SECOND_RESOLUTION},1`);
 
         reset();
-        await render(hbs`<div {{stopwatch-tick 1000 foo ticks=5}}>{{status}},{{duration}},{{ticks}}</div>`);
+        await render(hbs`<div {{stopwatch-tick 1000 this.foo ticks=5}}>{{status}},{{duration}},{{ticks}}</div>`);
         assert.equal(this.element.textContent.trim(), 'running,0,0');
         this.nativeTimer.tick(SECOND_RESOLUTION * 10);
         assert.equal(this.element.textContent.trim(), `done,${SECOND_RESOLUTION * 5},5`);

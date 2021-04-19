@@ -39,7 +39,7 @@ module('Integration | Modifier | clock-tick', function (hooks) {
         this.set('foo', () => {
             assert.notOk(true, 'Should not have made it here');
         });
-        await render(hbs`<div {{clock-tick foo foo}}></div>`);
+        await render(hbs`<div {{clock-tick this.foo this.foo}}></div>`);
     });
 
     test('it asserts when an invalid tickType is provided', async function (assert) {
@@ -50,14 +50,14 @@ module('Integration | Modifier | clock-tick', function (hooks) {
         this.set('foo', () => {
             assert.notOk(true, 'Should not have made it here');
         });
-        await render(hbs`<div {{clock-tick "foo" foo}}></div>`);
+        await render(hbs`<div {{clock-tick "foo" this.foo}}></div>`);
     });
 
     test('it renders', async function (assert) {
         this.set('foo', (time) => {
             this.set('time', time);
         });
-        await render(hbs`<div {{clock-tick "second" foo}}>{{time}}</div>`);
+        await render(hbs`<div {{clock-tick "second" this.foo}}>{{time}}</div>`);
         assert.equal(this.element.textContent.trim(), '');
         this.nativeTimer.tick(SECOND_RESOLUTION);
         assert.equal(this.element.textContent.trim(), `${1585818794000 + SECOND_RESOLUTION}`);
