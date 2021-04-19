@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.5.0
+
+This is a minor release that adds two new render `modifier`s that can help reduce setup/teardown logic.
+
+#### Changes
+
+-   Added `clock-tick` and `stopwatch-tick` render modifiers
+-   Updated to several dependencies (eslint\*, qunit)
+-   Updated to Ember CLI 3.26
+
 ### 0.4.0
 
 This is a minor release with no new features, mainly dependency updates.
