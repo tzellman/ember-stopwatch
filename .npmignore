@@ -2,6 +2,8 @@
 /dist/
 /tmp/
 /.idea
+/*.iml
+/coverage
 
 # dependencies
 /bower_components/
@@ -21,7 +23,6 @@
 /.prettierrc
 /.template-lintrc.js
 /.watchmanconfig
-/bower.json
 /config/ember-try.js
 /CONTRIBUTING.md
 /ember-cli-build.js
