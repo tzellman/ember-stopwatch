@@ -16,7 +16,7 @@
                 Refreshes every second
             </div>
             <div class="font-mono" data-test-second-clock>
-                {{moment-format this.timeByTheSecond}}
+                {{format-date this.timeByTheSecond}}
             </div>
         </div>
         <div class="bg-white rounded p-2">
@@ -27,7 +27,7 @@
                 Refreshes every minute
             </div>
             <div class="font-mono" data-test-minute-clock>
-                {{moment-format this.timeByTheMinute}}
+                {{format-date this.timeByTheMinute}}
             </div>
         </div>
         <div class="bg-white rounded p-2">
@@ -38,7 +38,7 @@
                 Refreshes every hour
             </div>
             <div class="font-mono" data-test-hour-clock>
-                {{moment-format this.timeByTheHour}}
+                {{format-date this.timeByTheHour}}
             </div>
         </div>
         <div class="bg-white rounded p-2">
@@ -49,7 +49,7 @@
                 Refreshes every day
             </div>
             <div class="font-mono" data-test-day-clock>
-                {{moment-format this.timeByTheDay}}
+                {{format-date this.timeByTheDay}}
             </div>
         </div>
     </div>
