@@ -76,7 +76,7 @@
     "eslint-plugin-ember": "^10.5.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-qunit": "^6.1.1",
+    "eslint-plugin-qunit": "^6.2.0",
     "husky": "4.3.8",
     "loader.js": "^4.7.0",
     "micromatch": "^4.0.4",
