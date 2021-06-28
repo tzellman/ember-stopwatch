@@ -29,6 +29,7 @@
 /renovate.json
 /testem.js
 /tests/
+/yarn-error.log
 /yarn.lock
 .gitkeep
 commitlint.config.js

@@ -15,6 +15,7 @@ module('Unit | Utility | timer', function (hooks) {
     });
 
     test('can create with default resolution', function (assert) {
+        assert.expect(3);
         let timer = new Timer(DEFAULT_RESOLUTION_MILLIS * 10);
         assert.ok(timer);
         assert.equal(timer.expirationMillis, DEFAULT_RESOLUTION_MILLIS * 10);
@@ -22,6 +23,7 @@ module('Unit | Utility | timer', function (hooks) {
     });
 
     test('can create with expiration lower than default resolution', function (assert) {
+        assert.expect(3);
         let timer = new Timer(DEFAULT_RESOLUTION_MILLIS - 1);
         assert.ok(timer);
         assert.equal(timer.expirationMillis, DEFAULT_RESOLUTION_MILLIS - 1);
@@ -29,6 +31,7 @@ module('Unit | Utility | timer', function (hooks) {
     });
 
     test('can attempt to create with higher resolution than expiration', function (assert) {
+        assert.expect(3);
         let timer = new Timer(DEFAULT_RESOLUTION_MILLIS, DEFAULT_RESOLUTION_MILLIS * 2);
         assert.ok(timer);
         assert.equal(timer.expirationMillis, DEFAULT_RESOLUTION_MILLIS);
@@ -36,6 +39,7 @@ module('Unit | Utility | timer', function (hooks) {
     });
 
     test('checks that remainingMillis updates', function (assert) {
+        assert.expect(12);
         let timer = new Timer(1000);
         timer.start();
         assert.ok(timer.isRunning, `timer should be running`);
@@ -44,8 +48,10 @@ module('Unit | Utility | timer', function (hooks) {
             this.nativeTimer.tick(200);
             assert.equal(timer.remainingMillis, 1000 - i * 200, `timer expiration is accurate`);
             if (i < 5) {
+                // eslint-disable-next-line qunit/no-conditional-assertions
                 assert.ok(timer.isRunning, `timer should be running`);
             } else {
+                // eslint-disable-next-line qunit/no-conditional-assertions
                 assert.notOk(timer.isRunning, `timer should not be running`);
             }
         }
@@ -55,6 +61,7 @@ module('Unit | Utility | timer', function (hooks) {
     });
 
     test('checks that multiple starts work', function (assert) {
+        assert.expect(6);
         let timer = new Timer(1000);
         timer.start();
 
@@ -72,6 +79,7 @@ module('Unit | Utility | timer', function (hooks) {
     });
 
     test('checks that stop works', function (assert) {
+        assert.expect(4);
         let timer = new Timer(1000);
         timer.start();
 
@@ -94,6 +102,7 @@ module('Unit | Utility | timer', function (hooks) {
     });
 
     test('checks that pause works', function (assert) {
+        assert.expect(3);
         let timer = new Timer(1000);
         timer.start();
 
@@ -114,6 +123,7 @@ module('Unit | Utility | timer', function (hooks) {
     });
 
     test('checks that restart works', function (assert) {
+        assert.expect(3);
         let timer = new Timer(1000);
         timer.start();
 
@@ -126,6 +136,7 @@ module('Unit | Utility | timer', function (hooks) {
     });
 
     test('checks that event listeners receive events', function (assert) {
+        assert.expect(5);
         let timer = new Timer(1000);
         let expiredCount = 0;
         const onHandler = () => {

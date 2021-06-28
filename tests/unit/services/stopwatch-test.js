@@ -16,11 +16,13 @@ module('Unit | Service | stopwatch', function (hooks) {
     });
 
     test('it exists', function (assert) {
+        assert.expect(1);
         const service = this.owner.lookup('service:stopwatch');
         assert.ok(service);
     });
 
     test('service functionality', function (assert) {
+        assert.expect(11);
         const service = this.owner.lookup('service:stopwatch');
         service.start();
         assert.ok(service.isRunning, `stopwatch should be running`);
@@ -54,6 +56,7 @@ module('Unit | Service | stopwatch', function (hooks) {
     });
 
     test('service listeners', function (assert) {
+        assert.expect(13);
         const service = this.owner.lookup('service:stopwatch');
         assertStopwatchListeners(assert, service, this.nativeTimer);
     });
