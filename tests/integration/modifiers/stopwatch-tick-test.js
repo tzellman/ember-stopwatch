@@ -22,6 +22,7 @@ module('Integration | Modifier | stopwatch-tick', function (hooks) {
     });
 
     test('it asserts when not enough arguments are provided', async function (assert) {
+        assert.expect(1);
         setupOnerror((err) =>
             assert.equal(err.message, `Assertion Failed: You must provide at least 2 arguments for {{stopwatch-tick}}`)
         );
@@ -44,6 +45,7 @@ module('Integration | Modifier | stopwatch-tick', function (hooks) {
     });
 
     test('it renders with args and named args', async function (assert) {
+        assert.expect(4);
         const reset = () => {
             this.set('status', 'running');
             this.set('duration', 0);

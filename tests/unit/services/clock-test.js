@@ -19,22 +19,26 @@ module('Unit | Service | clock', function (hooks) {
     });
 
     test('it exists', function (assert) {
+        assert.expect(1);
         const service = this.owner.lookup('service:clock');
         assert.ok(service);
     });
 
     test('service functionality', function (assert) {
+        assert.expect(2);
         const service = this.owner.lookup('service:clock');
         assert.ok(service.time, `clock should be running`);
         assert.equal(service.date.getTime(), service.time, `time and date are equal`);
     });
 
     test('service listeners', function (assert) {
+        assert.expect(16);
         const clock = this.owner.lookup('service:clock');
         assertClockListeners(assert, clock, this.nativeTimer);
     });
 
     test('clock tracked props are set on init', function (assert) {
+        assert.expect(8);
         const clock = this.owner.lookup('service:clock');
         const systemStartDate = new Date(SYSTEM_START);
 

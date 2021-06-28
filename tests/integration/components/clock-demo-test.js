@@ -22,6 +22,7 @@ module('Integration | Component | ClockDemo', function (hooks) {
     const assertNotEqualTrim = (assert, s1, s2, msg) => assert.notOk((s1 || '').trim() === (s2 || '').trim(), msg);
 
     test('should render new values for each clock type, but only when respective time divisions change', async function (assert) {
+        assert.expect(16);
         await render(hbs`<ClockDemo/>`);
 
         const secondClockSelector = '[data-test-second-clock]';

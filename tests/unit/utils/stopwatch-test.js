@@ -16,18 +16,21 @@ module('Unit | Utility | stopwatch', function (hooks) {
     });
 
     test('can create with defaults', function (assert) {
+        assert.expect(2);
         let stopwatch = new Stopwatch();
         assert.ok(stopwatch);
         assert.equal(stopwatch.tickMillis, DEFAULT_TICK_MILLIS);
     });
 
     test('can create with 0 and use default', function (assert) {
+        assert.expect(2);
         let stopwatch = new Stopwatch(0);
         assert.ok(stopwatch);
         assert.equal(stopwatch.tickMillis, DEFAULT_TICK_MILLIS);
     });
 
     test('checks that elapsed time updates', function (assert) {
+        assert.expect(9);
         let stopwatch = new Stopwatch(100);
         stopwatch.start();
         assert.ok(stopwatch.isRunning, `stopwatch should be running`);
@@ -50,6 +53,7 @@ module('Unit | Utility | stopwatch', function (hooks) {
     });
 
     test('checks that scheduled stop works', function (assert) {
+        assert.expect(5);
         let stopwatch = new Stopwatch(100);
         stopwatch.start();
         stopwatch.stop();
@@ -68,6 +72,7 @@ module('Unit | Utility | stopwatch', function (hooks) {
     });
 
     test('checks that forced stop works', function (assert) {
+        assert.expect(3);
         let stopwatch = new Stopwatch(100);
         stopwatch.start();
         stopwatch.stop(true);
@@ -79,6 +84,7 @@ module('Unit | Utility | stopwatch', function (hooks) {
     });
 
     test('checks that scheduled reset works', function (assert) {
+        assert.expect(6);
         let stopwatch = new Stopwatch(100);
         stopwatch.start();
 
@@ -97,6 +103,7 @@ module('Unit | Utility | stopwatch', function (hooks) {
     });
 
     test('checks that forced reset works', function (assert) {
+        assert.expect(5);
         let stopwatch = new Stopwatch(100);
         stopwatch.start();
 
@@ -112,6 +119,7 @@ module('Unit | Utility | stopwatch', function (hooks) {
     });
 
     test('checks multiple starts and stops', function (assert) {
+        assert.expect(9);
         let stopwatch = new Stopwatch(100);
         stopwatch.start();
         stopwatch.stop();
@@ -139,6 +147,7 @@ module('Unit | Utility | stopwatch', function (hooks) {
     });
 
     test('checks that event listeners receive events', function (assert) {
+        assert.expect(13);
         let stopwatch = new Stopwatch(100);
         assertStopwatchListeners(assert, stopwatch, this.nativeTimer);
     });

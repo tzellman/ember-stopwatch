@@ -20,12 +20,14 @@ module('Unit | Utility | clock', function (hooks) {
     });
 
     test('can create with default resolution', function (assert) {
+        assert.expect(2);
         let clock = new Clock();
         assert.ok(clock);
         assert.equal(clock.tickMillis, SECOND_RESOLUTION);
     });
 
     test('time is initially set on start', function (assert) {
+        assert.expect(2);
         let clock = new Clock();
         assert.equal(clock.time, undefined, `time is undefined before start`);
         clock.start();
@@ -33,6 +35,7 @@ module('Unit | Utility | clock', function (hooks) {
     });
 
     test('multiple starts are ignored', function (assert) {
+        assert.expect(2);
         let clock = new Clock();
         let listener = new EventCounter(clock, assert, 'start');
         clock.start();
@@ -44,6 +47,7 @@ module('Unit | Utility | clock', function (hooks) {
     });
 
     test('checks event triggers', function (assert) {
+        assert.expect(16);
         let clock = new Clock();
         assertClockListeners(assert, clock, this.nativeTimer);
     });
