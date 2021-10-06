@@ -46,7 +46,7 @@
     "@glimmer/component": "^1.0.4",
     "@glimmer/tracking": "^1.0.4",
     "@sinonjs/fake-timers": "^7.1.2",
-    "autoprefixer": "^10.3.5",
+    "autoprefixer": "^10.3.7",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
     "ember-auto-import": "^1.12.0",
