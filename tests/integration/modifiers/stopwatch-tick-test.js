@@ -68,4 +68,16 @@ module('Integration | Modifier | stopwatch-tick', function (hooks) {
         this.nativeTimer.tick(SECOND_RESOLUTION * 10);
         assert.equal(this.element.textContent.trim(), `done,${SECOND_RESOLUTION * 5},5`);
     });
+
+    test('it renders notify-after alias', async function (assert) {
+        assert.expect(2);
+        this.set('status', 'foo');
+        this.set('foo', (status) => {
+            this.set('status', status);
+        });
+        await render(hbs`<div {{call-after 500 (fn this.foo "bar")}}>{{status}}</div>`);
+        assert.equal(this.element.textContent.trim(), 'foo');
+        this.nativeTimer.tick(SECOND_RESOLUTION);
+        assert.equal(this.element.textContent.trim(), `bar`);
+    });
 });

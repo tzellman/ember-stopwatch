@@ -8,8 +8,8 @@
 [![Code Climate][climate-badge]][climate-badge-url]
 [![Test Coverage][coverage-badge]][coverage-badge-url]
 
-This addon provides some utilities and services that make it easier
-to control timing in your Ember applications.
+This addon provides some utilities and services that make it easier to control timing in your Ember
+applications.
 
 ## Installation
 
@@ -29,47 +29,55 @@ ember install ember-stopwatch
 
 ### Stopwatch
 
-A `Stopwatch` is a utility that allows you to be notified when `ticks` occur,
-making it easy for you to asynchronously take action on time-based boundaries.
+A `Stopwatch` is a utility that allows you to be notified when `ticks` occur, making it easy for you
+to asynchronously take action on time-based boundaries.
 
-The `Stopwatch` uses `@tracked` properties so your application
-can react to changes in time, based on the tick interval.
+The `Stopwatch` uses `@tracked` properties so your application can react to changes in time, based
+on the tick interval.
 
-The `stop` and `reset` methods allow you to either stop on the next tick interval,
-or forcefully (i.e. immediately).
+The `stop` and `reset` methods allow you to either stop on the next tick interval, or forcefully (
+i.e. immediately).
 
 #### As an element modifier
 
-The easiest and quickest way to start adding time utilities to your app is by using the 
+The easiest and quickest way to start adding time utilities to your app is by using the
 `stopwatch-tick` modifier.
 
 Your action handler will be passed the elapsed time and number of durations (ticks).
 
-Note that the stopwatch will start as soon as your element is inserted and the modifier is 
+Note that the stopwatch will start as soon as your element is inserted and the modifier is
 instrumented.
 
 ```handlebars
-    <div {{stopwatch-tick 1000 (fn (mut this.finishedLoading) true)}}>
-        {{#if this.finishedLoading}}
-            Waited 1 second, loaded!
-        {{/if}}
-    </div>
+<div {{stopwatch-tick 1000 (fn (mut this.finishedLoading) true)}}>
+    {{#if this.finishedLoading}}
+        Waited 1 second, loaded!
+    {{/if}}
+</div>
 ```
 
 You can also provide a number of ticks as an optional named parameter.
 
 ```handlebars
-    <div {{stopwatch-tick 1000 (fn (mut this.finishedLoading) true) ticks=10}}>
-        {{#if this.finishedLoading}}
-            Waited 10 seconds, loaded!
-        {{/if}}
-    </div>
+<div {{stopwatch-tick 1000 (fn (mut this.finishedLoading) true) ticks=10}}>
+    {{#if this.finishedLoading}}
+        Waited 10 seconds, loaded!
+    {{/if}}
+</div>
+```
+
+There also exists an alias for `stopwatch-tick` named `call-after` which may be more intuitive for
+your use-case.
+
+```handlebars
+<div {{call-after 1000 (fn (mut this.finishedLoading) true)}}>
+    ...
+</div>
 ```
 
 #### As a utility
 
-This is the primary use-case, and allows you to create multiple stopwatches anywhere
-in your application.
+This allows you to create multiple stopwatches anywhere in your application.
 
 ```javascript
 import Stopwatch from "ember-stopwatch/utils/stopwatch";
@@ -84,8 +92,8 @@ stopwatch.on("tick", someHandler);
 ```
 
 ```handlebars
-    {{this.stopwatch.elapsedMillis}}
-    {{this.stopwatch.numTicks}}
+{{this.stopwatch.elapsedMillis}}
+{{this.stopwatch.numTicks}}
 ```
 
 #### As a Service
@@ -95,10 +103,12 @@ A `stopwatch` service can be used that is shared globally in your application.
 ```javascript
 export default class extends Component {
     @service stopwatch;
+
     @action
     start() {
         this.stopwatch.start();
     }
+
     @action
     stop() {
         this.stopwatch.stop();
@@ -108,12 +118,12 @@ export default class extends Component {
 
 ### Timer
 
-A `Timer` is a utility that extends the `Stopwatch` behavior described above,
-except that the use-case is to handle "countdown" eventing. This enables your
-application to react to a `timeout` event.
+A `Timer` is a utility that extends the `Stopwatch` behavior described above, except that the
+use-case is to handle "countdown" eventing. This enables your application to react to a `timeout`
+event.
 
-Additionally, the `Timer` can be paused and restarted and contains reactful state
-properties (e.g. `remainingMillis` and `isExpired`).
+Additionally, the `Timer` can be paused and restarted and contains reactful state properties (
+e.g. `remainingMillis` and `isExpired`).
 
 ```javascript
 import Timer from "ember-stopwatch/utils/timer";
@@ -130,40 +140,40 @@ expirationHandler(){
 ```
 
 ```handlebars
-    {{this.timer.remainingMillis}}
-    {{this.timer.isExpired}}
+{{this.timer.remainingMillis}}
+{{this.timer.isExpired}}
 ```
 
 ### Clock
 
 #### As an element modifier
 
-The `clock-tick` modifier can be used to react to various time tick types, which includes `second`, 
+The `clock-tick` modifier can be used to react to various time tick types, which includes `second`,
 `minute`, `hour`, and `day`.
 
 Your action handler will be passed the current time (from the clock service), when triggered.
 
-Note that the ticks will be triggered on clock time thresholds, not elapsed time / durations (e.g. 
+Note that the ticks will be triggered on clock time thresholds, not elapsed time / durations (e.g.
 when the actual clock rolls over to a new second, minute, hour, etc.).
 
 ```javascript
 export default class extends Component {
-    @tracked time
+    @tracked time;
 }
 ```
 
 ```handlebars
-    <div {{clock-tick "second" (fn (mut this.time))}}>
-        {{moment-format this.time}}
-    </div>
+<div {{clock-tick "second" (fn (mut this.time))}}>
+    {{moment-format this.time}}
+</div>
 ```
 
 #### As a utility
 
 A `Clock` is a utility that tracks time ticks for the current system time.
 
-A `Clock` triggers events on time ticks, including `second`, `minute`, `hour`, and `day`.
-A `Clock` also provides reactful `time`, `date`, `second`, `minute`, `hour`, and `day` properties.
+A `Clock` triggers events on time ticks, including `second`, `minute`, `hour`, and `day`. A `Clock`
+also provides reactful `time`, `date`, `second`, `minute`, `hour`, and `day` properties.
 
 ```javascript
 import Clock from "ember-stopwatch/utils/clock";
@@ -181,13 +191,15 @@ myHandler(type) {
 ```
 
 ```handlebars
-    {{this.clock.time}}
+{{this.clock.time}}
 ```
 
 #### As a Service
 
-A `clock` service automatically creates and starts a single instance of the `Clock` utility and is a proxy for properties and methods of a clock instance.
-A `clock` service also has `@tracked` versions of the clock properties `second`, `minute`, `hour`, and `day` that can be used by the `@computed` macro to react to.
+A `clock` service automatically creates and starts a single instance of the `Clock` utility and is a
+proxy for properties and methods of a clock instance. A `clock` service also has `@tracked` versions
+of the clock properties `second`, `minute`, `hour`, and `day` that can be used by the other
+reactive getters in your application, including the `@computed` macros.
 
 ```javascript
 export default class extends Component {
@@ -196,7 +208,7 @@ export default class extends Component {
 ```
 
 ```handlebars
-    {{moment-format this.clock.time}}
+{{moment-format this.clock.time}}
 ```
 
 ```javascript
@@ -221,10 +233,15 @@ export default class extends Component {
 ```
 
 ```handlebars
-    Refreshes every second: {{moment-format this.clock.time}}
-    Refreshes every minute: {{moment-format this.timeByTheMinute}}
-    Refreshes every hour: {{moment-format this.timeByTheHour}}
-    Refreshes every day: {{moment-format this.timeByTheDay}}
+
+Refreshes every second:
+{{moment-format this.clock.time}}
+Refreshes every minute:
+{{moment-format this.timeByTheMinute}}
+Refreshes every hour:
+{{moment-format this.timeByTheHour}}
+Refreshes every day:
+{{moment-format this.timeByTheDay}}
 ```
 
 ## Compatibility
