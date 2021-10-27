@@ -24,7 +24,10 @@ module('Integration | Modifier | stopwatch-tick', function (hooks) {
     test('it asserts when not enough arguments are provided', async function (assert) {
         assert.expect(1);
         setupOnerror((err) =>
-            assert.equal(err.message, `Assertion Failed: You must provide at least 2 arguments for {{stopwatch-tick}}`)
+            assert.strictEqual(
+                err.message,
+                `Assertion Failed: You must provide at least 2 arguments for {{stopwatch-tick}}`
+            )
         );
         await render(hbs`<div {{stopwatch-tick}}></div>`);
     });
@@ -32,7 +35,7 @@ module('Integration | Modifier | stopwatch-tick', function (hooks) {
     test('it asserts when an invalid duration is provided', async function (assert) {
         assert.expect(2);
         setupOnerror((err) =>
-            assert.equal(
+            assert.strictEqual(
                 err.message,
                 `Assertion Failed: You must provide a positive number as the first positional argument for {{stopwatch-tick}}`
             )
@@ -57,16 +60,18 @@ module('Integration | Modifier | stopwatch-tick', function (hooks) {
             });
         };
         reset();
-        await render(hbs`<div {{stopwatch-tick 1000 this.foo}}>{{status}},{{duration}},{{ticks}}</div>`);
-        assert.equal(this.element.textContent.trim(), 'running,0,0');
+        await render(hbs`<div {{stopwatch-tick 1000 this.foo}}>{{this.status}},{{this.duration}},{{this.ticks}}</div>`);
+        assert.strictEqual(this.element.textContent.trim(), 'running,0,0');
         this.nativeTimer.tick(SECOND_RESOLUTION);
-        assert.equal(this.element.textContent.trim(), `done,${SECOND_RESOLUTION},1`);
+        assert.strictEqual(this.element.textContent.trim(), `done,${SECOND_RESOLUTION},1`);
 
         reset();
-        await render(hbs`<div {{stopwatch-tick 1000 this.foo ticks=5}}>{{status}},{{duration}},{{ticks}}</div>`);
-        assert.equal(this.element.textContent.trim(), 'running,0,0');
+        await render(
+            hbs`<div {{stopwatch-tick 1000 this.foo ticks=5}}>{{this.status}},{{this.duration}},{{this.ticks}}</div>`
+        );
+        assert.strictEqual(this.element.textContent.trim(), 'running,0,0');
         this.nativeTimer.tick(SECOND_RESOLUTION * 10);
-        assert.equal(this.element.textContent.trim(), `done,${SECOND_RESOLUTION * 5},5`);
+        assert.strictEqual(this.element.textContent.trim(), `done,${SECOND_RESOLUTION * 5},5`);
     });
 
     test('it renders notify-after alias', async function (assert) {
@@ -75,9 +80,9 @@ module('Integration | Modifier | stopwatch-tick', function (hooks) {
         this.set('foo', (status) => {
             this.set('status', status);
         });
-        await render(hbs`<div {{call-after 500 (fn this.foo "bar")}}>{{status}}</div>`);
-        assert.equal(this.element.textContent.trim(), 'foo');
+        await render(hbs`<div {{call-after 500 (fn this.foo "bar")}}>{{this.status}}</div>`);
+        assert.strictEqual(this.element.textContent.trim(), 'foo');
         this.nativeTimer.tick(SECOND_RESOLUTION);
-        assert.equal(this.element.textContent.trim(), `bar`);
+        assert.strictEqual(this.element.textContent.trim(), `bar`);
     });
 });

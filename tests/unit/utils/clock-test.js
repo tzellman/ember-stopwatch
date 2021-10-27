@@ -23,15 +23,15 @@ module('Unit | Utility | clock', function (hooks) {
         assert.expect(2);
         let clock = new Clock();
         assert.ok(clock);
-        assert.equal(clock.tickMillis, SECOND_RESOLUTION);
+        assert.strictEqual(clock.tickMillis, SECOND_RESOLUTION);
     });
 
     test('time is initially set on start', function (assert) {
         assert.expect(2);
         let clock = new Clock();
-        assert.equal(clock.time, undefined, `time is undefined before start`);
+        assert.strictEqual(clock.time, undefined, `time is undefined before start`);
         clock.start();
-        assert.equal(clock.time, SYSTEM_START, `clock should be initially set`);
+        assert.strictEqual(clock.time, SYSTEM_START, `clock should be initially set`);
     });
 
     test('multiple starts are ignored', function (assert) {
@@ -43,7 +43,7 @@ module('Unit | Utility | clock', function (hooks) {
         this.nativeTimer.tick(SECOND_RESOLUTION);
         clock.start();
         this.nativeTimer.tick(SECOND_RESOLUTION);
-        assert.equal(listener.startCount, 1, `clock should ignore multiple starts`);
+        assert.strictEqual(listener.startCount, 1, `clock should ignore multiple starts`);
     });
 
     test('checks event triggers', function (assert) {

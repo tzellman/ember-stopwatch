@@ -28,7 +28,7 @@ module('Unit | Service | clock', function (hooks) {
         assert.expect(2);
         const service = this.owner.lookup('service:clock');
         assert.ok(service.time, `clock should be running`);
-        assert.equal(service.date.getTime(), service.time, `time and date are equal`);
+        assert.strictEqual(service.date.getTime(), service.time, `time and date are equal`);
     });
 
     test('service listeners', function (assert) {
@@ -42,22 +42,26 @@ module('Unit | Service | clock', function (hooks) {
         const clock = this.owner.lookup('service:clock');
         const systemStartDate = new Date(SYSTEM_START);
 
-        assert.equal(
+        assert.strictEqual(
             clock.second,
             systemStartDate.getSeconds(),
             `second is set correctly: ${systemStartDate.getSeconds()}`
         );
-        assert.equal(
+        assert.strictEqual(
             clock.minute,
             systemStartDate.getMinutes(),
             `minute is set correctly: ${systemStartDate.getMinutes()}`
         );
-        assert.equal(clock.hour, systemStartDate.getHours(), `hour is set correctly: ${systemStartDate.getHours()}`);
-        assert.equal(clock.day, systemStartDate.getDate(), `day is set correctly: ${systemStartDate.getDate()}`);
+        assert.strictEqual(
+            clock.hour,
+            systemStartDate.getHours(),
+            `hour is set correctly: ${systemStartDate.getHours()}`
+        );
+        assert.strictEqual(clock.day, systemStartDate.getDate(), `day is set correctly: ${systemStartDate.getDate()}`);
 
-        assert.equal(clock.clock.second, clock.second, 'service second matches util second');
-        assert.equal(clock.clock.minute, clock.minute, 'service minute matches util minute');
-        assert.equal(clock.clock.hour, clock.hour, 'service hour matches util hour');
-        assert.equal(clock.clock.day, clock.day, 'service day matches util day');
+        assert.strictEqual(clock.clock.second, clock.second, 'service second matches util second');
+        assert.strictEqual(clock.clock.minute, clock.minute, 'service minute matches util minute');
+        assert.strictEqual(clock.clock.hour, clock.hour, 'service hour matches util hour');
+        assert.strictEqual(clock.clock.day, clock.day, 'service day matches util day');
     });
 });

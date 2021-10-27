@@ -24,7 +24,10 @@ module('Integration | Modifier | clock-tick', function (hooks) {
     test('it asserts when not enough arguments are provided', async function (assert) {
         assert.expect(1);
         setupOnerror((err) =>
-            assert.equal(err.message, `Assertion Failed: You must provide at least 2 arguments for {{clock-tick}}`)
+            assert.strictEqual(
+                err.message,
+                `Assertion Failed: You must provide at least 2 arguments for {{clock-tick}}`
+            )
         );
         await render(hbs`<div {{clock-tick}}></div>`);
     });
@@ -32,7 +35,7 @@ module('Integration | Modifier | clock-tick', function (hooks) {
     test('it asserts when a non-string tickType is provided', async function (assert) {
         assert.expect(1);
         setupOnerror((err) =>
-            assert.equal(
+            assert.strictEqual(
                 err.message,
                 `Assertion Failed: You must provide a string as the first positional argument for {{clock-tick}}`
             )
@@ -46,7 +49,7 @@ module('Integration | Modifier | clock-tick', function (hooks) {
     test('it asserts when an invalid tickType is provided', async function (assert) {
         assert.expect(1);
         setupOnerror((err) =>
-            assert.equal(err.message, `Assertion Failed: You provided an invalid duration argument {{foo}}`)
+            assert.strictEqual(err.message, `Assertion Failed: You provided an invalid duration argument {{foo}}`)
         );
         this.set('foo', () => {
             assert.notOk(true, 'Should not have made it here');
@@ -59,9 +62,9 @@ module('Integration | Modifier | clock-tick', function (hooks) {
         this.set('foo', (time) => {
             this.set('time', time);
         });
-        await render(hbs`<div {{clock-tick "second" this.foo}}>{{time}}</div>`);
-        assert.equal(this.element.textContent.trim(), '');
+        await render(hbs`<div {{clock-tick "second" this.foo}}>{{this.time}}</div>`);
+        assert.strictEqual(this.element.textContent.trim(), '');
         this.nativeTimer.tick(SECOND_RESOLUTION);
-        assert.equal(this.element.textContent.trim(), `${1585818794000 + SECOND_RESOLUTION}`);
+        assert.strictEqual(this.element.textContent.trim(), `${1585818794000 + SECOND_RESOLUTION}`);
     });
 });

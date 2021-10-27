@@ -19,14 +19,14 @@ module('Unit | Utility | stopwatch', function (hooks) {
         assert.expect(2);
         let stopwatch = new Stopwatch();
         assert.ok(stopwatch);
-        assert.equal(stopwatch.tickMillis, DEFAULT_TICK_MILLIS);
+        assert.strictEqual(stopwatch.tickMillis, DEFAULT_TICK_MILLIS);
     });
 
     test('can create with 0 and use default', function (assert) {
         assert.expect(2);
         let stopwatch = new Stopwatch(0);
         assert.ok(stopwatch);
-        assert.equal(stopwatch.tickMillis, DEFAULT_TICK_MILLIS);
+        assert.strictEqual(stopwatch.tickMillis, DEFAULT_TICK_MILLIS);
     });
 
     test('checks that elapsed time updates', function (assert) {
@@ -36,20 +36,20 @@ module('Unit | Utility | stopwatch', function (hooks) {
         assert.ok(stopwatch.isRunning, `stopwatch should be running`);
 
         this.nativeTimer.tick(99);
-        assert.equal(stopwatch.elapsedMillis, 0, `stopwatch tick has not been triggered yet`);
-        assert.equal(stopwatch.numTicks, 0, `stopwatch tick has not been triggered yet`);
+        assert.strictEqual(stopwatch.elapsedMillis, 0, `stopwatch tick has not been triggered yet`);
+        assert.strictEqual(stopwatch.numTicks, 0, `stopwatch tick has not been triggered yet`);
 
         this.nativeTimer.tick(1);
-        assert.equal(stopwatch.elapsedMillis, 100, `stopwatch tick has been triggered once`);
-        assert.equal(stopwatch.numTicks, 1, `stopwatch tick has been triggered once`);
+        assert.strictEqual(stopwatch.elapsedMillis, 100, `stopwatch tick has been triggered once`);
+        assert.strictEqual(stopwatch.numTicks, 1, `stopwatch tick has been triggered once`);
 
         this.nativeTimer.tick(15);
-        assert.equal(stopwatch.elapsedMillis, 100, `stopwatch tick still should only be triggered once`);
-        assert.equal(stopwatch.numTicks, 1, `stopwatch tick has been triggered once`);
+        assert.strictEqual(stopwatch.elapsedMillis, 100, `stopwatch tick still should only be triggered once`);
+        assert.strictEqual(stopwatch.numTicks, 1, `stopwatch tick has been triggered once`);
 
         this.nativeTimer.tick(85);
-        assert.equal(stopwatch.elapsedMillis, 200, `stopwatch tick should only be triggered twice`);
-        assert.equal(stopwatch.numTicks, 2, `stopwatch tick has been triggered twice`);
+        assert.strictEqual(stopwatch.elapsedMillis, 200, `stopwatch tick should only be triggered twice`);
+        assert.strictEqual(stopwatch.numTicks, 2, `stopwatch tick has been triggered twice`);
     });
 
     test('checks that scheduled stop works', function (assert) {
@@ -68,7 +68,7 @@ module('Unit | Utility | stopwatch', function (hooks) {
         this.nativeTimer.tick(300);
         assert.notOk(stopwatch.isRunning, `stopwatch should not be running`);
 
-        assert.equal(stopwatch.elapsedMillis, 100, `stopwatch should still be at the first tick`);
+        assert.strictEqual(stopwatch.elapsedMillis, 100, `stopwatch should still be at the first tick`);
     });
 
     test('checks that forced stop works', function (assert) {
@@ -80,7 +80,7 @@ module('Unit | Utility | stopwatch', function (hooks) {
 
         this.nativeTimer.tick(300);
         assert.notOk(stopwatch.isRunning, `stopwatch should still not be running`);
-        assert.equal(stopwatch.elapsedMillis, 0, `stopwatch should never have ticked`);
+        assert.strictEqual(stopwatch.elapsedMillis, 0, `stopwatch should never have ticked`);
     });
 
     test('checks that scheduled reset works', function (assert) {
@@ -89,17 +89,17 @@ module('Unit | Utility | stopwatch', function (hooks) {
         stopwatch.start();
 
         this.nativeTimer.tick(299);
-        assert.equal(stopwatch.elapsedMillis, 200, `stopwatch should have ticked twice`);
+        assert.strictEqual(stopwatch.elapsedMillis, 200, `stopwatch should have ticked twice`);
         stopwatch.reset();
         assert.ok(stopwatch.isRunning, `stopwatch should still be running`);
 
         this.nativeTimer.tick(1);
         assert.notOk(stopwatch.isRunning, `stopwatch should not be running`);
-        assert.equal(stopwatch.elapsedMillis, 0, `stopwatch elapsed should be reset`);
+        assert.strictEqual(stopwatch.elapsedMillis, 0, `stopwatch elapsed should be reset`);
 
         this.nativeTimer.tick(500);
         assert.notOk(stopwatch.isRunning, `stopwatch should still not be running`);
-        assert.equal(stopwatch.elapsedMillis, 0, `stopwatch elapsed should still be 0`);
+        assert.strictEqual(stopwatch.elapsedMillis, 0, `stopwatch elapsed should still be 0`);
     });
 
     test('checks that forced reset works', function (assert) {
@@ -108,14 +108,14 @@ module('Unit | Utility | stopwatch', function (hooks) {
         stopwatch.start();
 
         this.nativeTimer.tick(299);
-        assert.equal(stopwatch.elapsedMillis, 200, `stopwatch should have ticked twice`);
+        assert.strictEqual(stopwatch.elapsedMillis, 200, `stopwatch should have ticked twice`);
         stopwatch.reset(true);
         assert.notOk(stopwatch.isRunning, `stopwatch should not be running`);
-        assert.equal(stopwatch.elapsedMillis, 0, `stopwatch elapsed should be reset`);
+        assert.strictEqual(stopwatch.elapsedMillis, 0, `stopwatch elapsed should be reset`);
 
         this.nativeTimer.tick(500);
         assert.notOk(stopwatch.isRunning, `stopwatch should still not be running`);
-        assert.equal(stopwatch.elapsedMillis, 0, `stopwatch elapsed should still be 0`);
+        assert.strictEqual(stopwatch.elapsedMillis, 0, `stopwatch elapsed should still be 0`);
     });
 
     test('checks multiple starts and stops', function (assert) {
@@ -125,14 +125,14 @@ module('Unit | Utility | stopwatch', function (hooks) {
         stopwatch.stop();
         this.nativeTimer.tick(300);
         // first tick
-        assert.equal(stopwatch.elapsedMillis, 100, `stopwatch should have only ticked once`);
+        assert.strictEqual(stopwatch.elapsedMillis, 100, `stopwatch should have only ticked once`);
         assert.notOk(stopwatch.isRunning, `stopwatch should not be running`);
 
         stopwatch.stop();
         assert.notOk(stopwatch.isRunning, `stopwatch should not be running`);
         this.nativeTimer.tick(300);
         assert.notOk(stopwatch.isRunning, `stopwatch should not be running`);
-        assert.equal(stopwatch.elapsedMillis, 100, `stopwatch should have only ticked once`);
+        assert.strictEqual(stopwatch.elapsedMillis, 100, `stopwatch should have only ticked once`);
 
         stopwatch.start();
         stopwatch.start();
@@ -143,7 +143,7 @@ module('Unit | Utility | stopwatch', function (hooks) {
         assert.ok(stopwatch.isRunning, `stopwatch should be running`);
         this.nativeTimer.tick(2000);
         assert.notOk(stopwatch.isRunning, `stopwatch should not be running`);
-        assert.equal(stopwatch.elapsedMillis, 600, `stopwatch should have ticked 6 times`);
+        assert.strictEqual(stopwatch.elapsedMillis, 600, `stopwatch should have ticked 6 times`);
     });
 
     test('checks that event listeners receive events', function (assert) {
