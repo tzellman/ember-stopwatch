@@ -17,7 +17,7 @@ module('Integration | Component | ClockDemo', function (hooks) {
         this.nativeTimer.uninstall();
     });
 
-    const assertEqualTrim = (assert, s1, s2, msg) => assert.equal((s1 || '').trim(), (s2 || '').trim(), msg);
+    const assertEqualTrim = (assert, s1, s2, msg) => assert.strictEqual((s1 || '').trim(), (s2 || '').trim(), msg);
     // NOTE: On Ember 3.12 the notEqual helper adds a NOT in the result value... hence why I'm using notOk
     const assertNotEqualTrim = (assert, s1, s2, msg) => assert.notOk((s1 || '').trim() === (s2 || '').trim(), msg);
 
