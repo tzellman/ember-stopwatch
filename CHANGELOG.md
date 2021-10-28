@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.7.0
+
+This is a minor release composed primarily of dependency updates, and a new modifier.
+
+#### Changes
+
+-   Added `call-after` modifier (alias of `stopwatch-tick`)
+-   Updated to Ember CLI 3.28
+-   Updated several dependencies to the latest versions
+-   Dropped support for Node.js v10.0
+-   linting fixes after eslint plugin updates, in tests
+
 ### 0.6.0
 
 This is a minor release that adds no new functionality to the core addon. Primarily dependency updates and test lint/assertion updates.
