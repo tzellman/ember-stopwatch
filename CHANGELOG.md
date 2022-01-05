@@ -1,5 +1,15 @@
 # Changelog
 
+### 1.0.0
+
+🎉 This is the first major release of ember-stopwatch! 🎉
+
+#### Changes
+
+-   Updated to Ember 4.x
+-   Updated to use ember-auto-import 2.x
+-   Updated most other dependencies to the latest
+
 ### 0.7.0
 
 This is a minor release composed primarily of dependency updates, and a new modifier.

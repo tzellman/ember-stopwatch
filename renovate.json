@@ -22,9 +22,13 @@
     "separateMinorPatch": true,
     "packageRules": [
         {
-            "paths": ["+(package.json)"],
+            "matchPaths": ["+(package.json)"],
             "rangeStrategy": "bump",
-            "ignoreDeps": ["ember-cli", "tailwindcss"]
+            "ignoreDeps": ["ember-cli"]
+        },
+        {
+            "matchPackageNames": ["eslint"],
+            "allowedVersions": "<8"
         }
     ],
     "enabledManagers": ["npm", "travis"],
