@@ -1,7 +1,8 @@
-import Modifier from 'ember-modifier';
-import { inject as service } from '@ember/service';
 import { assert } from '@ember/debug';
+import { registerDestructor } from '@ember/destroyable';
+import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import Modifier from 'ember-modifier';
 
 const modifierName = 'clock-tick';
 
@@ -19,30 +20,30 @@ const parseTickType = (tickType) => {
     return parsedType;
 };
 
+const cleanup = (instance) => {
+    const { tickType, clock } = instance;
+    if (tickType) {
+        clock.off(tickType, instance, instance._handler);
+    }
+};
+
 export default class ClockTickModifier extends Modifier {
     @service clock;
     @tracked tickType;
+    @tracked handler;
 
-    get handler() {
-        return this.args.positional[1];
-    }
-
-    didReceiveArguments() {
-        assert(`You must provide at least 2 arguments for {{${modifierName}}}`, this.args.positional.length > 1);
-        let tickType = this.args.positional[0];
+    modify(element, positionalArgs) {
+        assert(`You must provide at least 2 arguments for {{${modifierName}}}`, positionalArgs.length > 1);
+        let tickType = positionalArgs[0];
         assert(
             `You must provide a string as the first positional argument for {{${modifierName}}}`,
             typeof tickType === 'string' && tickType.length > 0
         );
         this.tickType = parseTickType(tickType);
         assert(`You provided an invalid duration argument {{${tickType}}}`, !!this.tickType);
+        this.handler = positionalArgs[1];
         this.clock.on(this.tickType, this, this._handler);
-    }
-
-    willRemove() {
-        if (this.tickType) {
-            this.clock.off(this.tickType, this, this._handler);
-        }
+        registerDestructor(this, cleanup);
     }
 
     _handler() {
