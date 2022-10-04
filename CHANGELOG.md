@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.1.0
+
+This is a minor release composed primarily of dependency updates.
+
+#### Changes
+
+-   Updated to Ember 4.7.x
+-   Updated most other dependencies to the latest
+
 ### 1.0.0
 
 🎉 This is the first major release of ember-stopwatch! 🎉
