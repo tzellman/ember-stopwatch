@@ -1,9 +1,9 @@
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
 import { render, setupOnerror } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
 import fakeTimers from '@sinonjs/fake-timers';
+import { hbs } from 'ember-cli-htmlbars';
 import { SECOND_RESOLUTION } from 'ember-stopwatch/utils/clock';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from '../../helpers';
 
 // force starting on a second boundary
 // 2020-04-02T09:13:14.000Z
