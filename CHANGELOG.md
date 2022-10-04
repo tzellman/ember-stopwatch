@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.1.1
+
+This is a patch release that resolves deprecation warnings with ember-modifier.
+
+#### Changes
+
+-   resolve ember-modifier deprecation warnings
+-   use registerDestructor from @ember/destroyable for teardown
+
 ### 1.1.0
 
 This is a minor release composed primarily of dependency updates.
