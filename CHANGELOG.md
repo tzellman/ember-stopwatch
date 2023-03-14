@@ -1,5 +1,10 @@
 # Changelog
 
+### 1.2.0
+
+-   Updated dependencies
+-   ran ember-cli-update to 4.11
+
 ### 1.1.1
 
 This is a patch release that resolves deprecation warnings with ember-modifier.

@@ -32,6 +32,11 @@ export default class ClockTickModifier extends Modifier {
     @tracked tickType;
     @tracked handler;
 
+    constructor(owner, args) {
+        super(owner, args);
+        registerDestructor(this, cleanup);
+    }
+
     modify(element, positionalArgs) {
         assert(`You must provide at least 2 arguments for {{${modifierName}}}`, positionalArgs.length > 1);
         let tickType = positionalArgs[0];
@@ -43,7 +48,6 @@ export default class ClockTickModifier extends Modifier {
         assert(`You provided an invalid duration argument {{${tickType}}}`, !!this.tickType);
         this.handler = positionalArgs[1];
         this.clock.on(this.tickType, this, this._handler);
-        registerDestructor(this, cleanup);
     }
 
     _handler() {

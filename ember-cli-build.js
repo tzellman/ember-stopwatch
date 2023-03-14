@@ -1,14 +1,23 @@
 'use strict';
 
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = function (defaults) {
-    let app = new EmberAddon(defaults, {
+    const app = new EmberAddon(defaults, {
+        autoImport: {
+            webpack: {
+                plugins: [new NodePolyfillPlugin({ includeAliases: ['util'] })]
+            }
+        },
+        babel: {
+            plugins: [...require('ember-cli-code-coverage').buildBabelPlugin()]
+        },
         postcssOptions: {
             compile: {
                 cacheInclude: [/.*\.(css|scss|hbs)$/, /.tailwind\.js$/],
                 enabled: true,
-                plugins: [require('tailwindcss')('./config/tailwind.js'), require('autoprefixer')]
+                plugins: [require('tailwindcss')('./tests/dummy/config/tailwind.js'), require('autoprefixer')]
             }
         }
     });
