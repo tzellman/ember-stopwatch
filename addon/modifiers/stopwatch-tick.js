@@ -26,6 +26,11 @@ export default class StopwatchTickModifier extends Modifier {
     @tracked numTicksHandled = 0;
     @tracked ticks;
 
+    constructor(owner, args) {
+        super(owner, args);
+        registerDestructor(this, cleanup);
+    }
+
     modify(element, positionalArgs, { ticks }) {
         assert(`You must provide at least 2 arguments for {{${modifierName}}}`, positionalArgs.length > 1);
         let durationMillis = positionalArgs[0];
@@ -39,7 +44,6 @@ export default class StopwatchTickModifier extends Modifier {
         this.stopwatch = new Stopwatch(this.durationMillis);
         this.stopwatch.on('tick', this, this._handler);
         this.stopwatch.start(true);
-        registerDestructor(this, cleanup);
     }
 
     _handler() {
