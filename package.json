@@ -44,7 +44,7 @@
     "@ember/string": "^3.0.1",
     "@ember/test-helpers": "^2.9.3",
     "@embroider/test-setup": "^2.1.1",
-    "@glimmer/component": "^1.1.2",
+    "@glimmer/component": "^2.1.1",
     "@glimmer/tracking": "^1.1.2",
     "@sinonjs/fake-timers": "^10.0.2",
     "autoprefixer": "^10.4.14",
